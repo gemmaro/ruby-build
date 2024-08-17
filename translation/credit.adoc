@@ -1,0 +1,10 @@
+PO4A-HEADER: mode=eof
+
+
+'''
+
+== 日本語訳について
+
+この日本語訳の原文は https://rbenv.org/man/ruby-build.1:[ruby-build(1) Manual Page] です。
+
+先行訳として https://ruby.studio-kingdom.com/rbenv/ruby_build/:[Ruby STUDIO/ruby-build] がありますが、本訳の作成にあたって参照していません。
