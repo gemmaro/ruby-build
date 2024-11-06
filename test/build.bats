@@ -397,8 +397,8 @@ DEF
   unstub make
 
   assert_build_log <<OUT
-openssl-1.1.1w: [--prefix=${INSTALL_ROOT}/openssl,--openssldir=${INSTALL_ROOT}/openssl/ssl,zlib-dynamic,no-ssl3,shared] PKG_CONFIG_PATH=${TMP}/install/openssl/lib/pkgconfig
-PKG_CONFIG_PATH=${TMP}/install/openssl/lib/pkgconfig make -j 2
+openssl-1.1.1w: [--prefix=${INSTALL_ROOT}/openssl,--openssldir=${INSTALL_ROOT}/openssl/ssl,--libdir=lib,zlib-dynamic,no-ssl3,shared]
+make -j 2
 make install_sw install_ssldirs
 ruby-3.2.0: [--prefix=$INSTALL_ROOT,--with-openssl-dir=$INSTALL_ROOT/openssl,--with-ext=openssl,psych,+] PKG_CONFIG_PATH=${TMP}/install/openssl/lib/pkgconfig
 PKG_CONFIG_PATH=${TMP}/install/openssl/lib/pkgconfig make -j 2
@@ -750,7 +750,7 @@ OUT
   stub_make_install "update-gems"
 
   run_inline_definition <<DEF
-install_package "ruby-3.2.0" "http://ruby-lang.org/ruby/3.0/ruby-3.2.0.tar.gz" autoconf standard_install_with_bundled_gems
+install_package "ruby-3.2.0" "http://ruby-lang.org/ruby/3.0/ruby-3.2.0.tar.gz" autoconf enable_shared standard_install_with_bundled_gems
 DEF
   assert_success
 
@@ -761,7 +761,7 @@ DEF
 
   assert_build_log <<OUT
 autoreconf -i
-ruby-3.2.0: [--prefix=$INSTALL_ROOT,--with-ext=openssl,psych,+]
+ruby-3.2.0: [--prefix=${TMP}/install,--enable-shared,--with-ext=openssl,psych,+]
 make -j 2
 make update-gems extract-gems install
 OUT

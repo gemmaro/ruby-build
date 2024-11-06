@@ -16,7 +16,7 @@
 #   -6, --ipv6      Resolve names to IPv6 addresses only
 #
 
-RUBY_BUILD_VERSION="20240917"
+RUBY_BUILD_VERSION="20241105"
 
 OLDIFS="$IFS"
 
@@ -1154,7 +1154,7 @@ needs_openssl() {
   # shellcheck disable=SC2207
   versions=( $(awk '{print $2}' <<<"$brew_installs" | sort_versions) )
   local index="${#versions[@]}"
-  while [ $((index--)) -ge 0 ]; do
+  while [ $((--index)) -ge 0 ]; do
     homebrew_version="$(normalize_semver "${versions[index]}")"
     (( homebrew_version >= lower_bound && homebrew_version < upper_bound )) || continue
     while read -r formula version prefix; do
@@ -1209,20 +1209,20 @@ build_package_openssl() {
   # Tell Ruby to use this openssl for its extension.
   package_option ruby configure --with-openssl-dir="$OPENSSL_PREFIX_PATH"
 
-  # Make sure pkg-config finds our build first.
-  export PKG_CONFIG_PATH="${OPENSSL_PREFIX_PATH}/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
-
   local nokerberos
   [[ "$1" != openssl-1.0.* ]] || nokerberos=1
 
   # Compile a shared lib with zlib dynamically linked.
-  package_option openssl configure --openssldir="$OPENSSLDIR" zlib-dynamic no-ssl3 shared ${nokerberos:+no-ssl2 no-krb5}
+  package_option openssl configure --openssldir="$OPENSSLDIR" --libdir="lib" zlib-dynamic no-ssl3 shared ${nokerberos:+no-ssl2 no-krb5}
 
   # Skip building OpenSSL docs, which is slow.
   local make_target="install_sw install_ssldirs"
   [[ "$1" != openssl-1.0.* ]] || make_target="install_sw" # OpenSSL 1.0 does not have `install_ssldirs`
 
   OPENSSL_CONFIGURE="${OPENSSL_CONFIGURE:-./config}" MAKE_INSTALL_TARGET="$make_target" build_package_standard "$@"
+
+  # Make sure pkg-config finds the new OpenSSL installation.
+  export PKG_CONFIG_PATH="${OPENSSL_PREFIX_PATH}/lib/pkgconfig${PKG_CONFIG_PATH:+:$PKG_CONFIG_PATH}"
 
   local pem_file="$OPENSSLDIR/cert.pem"
   if is_mac; then
@@ -1431,6 +1431,10 @@ if [ "${#EXTRA_ARGUMENTS[@]}" -gt 0 ]; then
 fi
 
 if [ "$APPEND_DEFINITION_TO_PREFIX" = "true" ]; then
+  if [ -p "$DEFINITION_PATH" ]; then
+    echo "ruby-build: using named pipes in combination with \`--dir' is not possible" >&2
+    EARLY_EXIT=usage_error
+  fi
   PREFIX_PATH="$PREFIX_PATH/$(basename "$DEFINITION_PATH")"
 fi
 
@@ -1457,7 +1461,7 @@ usage_error )
 esac
 
 # expand the <definition> argument to full path of the definition file
-if [ ! -f "$DEFINITION_PATH" ]; then
+if [[ ! -f "$DEFINITION_PATH" && ! -p "$DEFINITION_PATH" ]]; then
   for DEFINITION_DIR in "${RUBY_BUILD_DEFINITIONS[@]}"; do
     if [ -f "${DEFINITION_DIR}/${DEFINITION_PATH}" ]; then
       DEFINITION_PATH="${DEFINITION_DIR}/${DEFINITION_PATH}"
