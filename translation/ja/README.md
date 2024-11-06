@@ -43,7 +43,8 @@ PREFIX=/usr/local ./ruby-build-*/install.sh
 
 ```sh
 # 独立としたプログラムとしての使い方
-$ ruby-build --list                        # 利用できるRubyのバージョンを一覧にします
+$ ruby-build --list                        # 最新安定リリースのRubyのバージョンの一覧
+$ ruby-build --definitions                 # 定義を一覧にします（旧版含む）
 $ ruby-build 3.2.2 /opt/rubies/ruby-3.2.2  # Ruby 3.2.2をインストールします
 $ ruby-build -d ruby-3.2.2 /opt/rubies     # 上の例の別の形式
 
