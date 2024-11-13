@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ruby-build\n"
-"POT-Creation-Date: 2024-11-07 07:47+0900\n"
-"PO-Revision-Date: 2024-11-07 07:53+0900\n"
+"POT-Creation-Date: 2024-11-14 06:56+0900\n"
+"PO-Revision-Date: 2024-11-14 06:59+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -796,7 +796,7 @@ msgid ""
 msgstr "ビルド過程は、以下の環境変数を通じて構成できます。"
 
 #. type: Plain text
-#: ../README.md:102
+#: ../README.md:103
 #, no-wrap
 msgid ""
 "| Variable                        | Function                                                                                         |\n"
@@ -814,6 +814,7 @@ msgid ""
 "| `RUBY_BUILD_TARBALL_OVERRIDE`   | Override the URL to fetch the ruby tarball from, optionally followed by `#checksum`.             |\n"
 "| `RUBY_BUILD_DEFINITIONS`        | Colon-separated list of paths to search for build definition files.                              |\n"
 "| `RUBY_BUILD_ROOT`               | The path prefix to search for build definitions files. *Deprecated:* use `RUBY_BUILD_DEFINITIONS`|\n"
+"| `RUBY_BUILD_VENDOR_OPENSSL`     | Build and vendor openssl even if the system openssl is compatible                                |\n"
 "| `CC`                            | Path to the C compiler.                                                                          |\n"
 "| `RUBY_CFLAGS`                   | Additional `CFLAGS` options (_e.g.,_ to override `-O3`).                                         |\n"
 "| `CONFIGURE_OPTS`                | Additional `./configure` options.                                                                |\n"
@@ -841,6 +842,7 @@ msgstr ""
 "| `RUBY_BUILD_TARBALL_OVERRIDE`   | rubyのtarballを取得してくるためのURLを上塗りします。`#checksum`を付けられます。             |\n"
 "| `RUBY_BUILD_DEFINITIONS`        | コロン区切りのパスのリストであり、ビルド定義ファイルを探索する場所です。                              |\n"
 "| `RUBY_BUILD_ROOT`               | ビルド定義ファイルを探索するパスの接頭辞です。*廃止されました：*`RUBY_BUILD_DEFINITIONS`をお使いください|\n"
+"| `RUBY_BUILD_VENDOR_OPENSSL`     | システムのopensslに互換性があったとしても、opensslをビルドしてそれを使います                                |\n"
 "| `CC`                            | Cコンパイラへのパスです。                                                                          |\n"
 "| `RUBY_CFLAGS`                   | `CFLAGS`への追加オプションです（*例*として`-O3`を上塗りできます）。                                         |\n"
 "| `CONFIGURE_OPTS`                | `./configure`の追加オプションです。                                                                |\n"
@@ -854,13 +856,13 @@ msgstr ""
 "| `CLICOLOR_FORCE`                | 端末に接続していないときでも、出力でANSIの色彩を使います。                                 |\n"
 
 #. type: Title ####
-#: ../README.md:103
+#: ../README.md:104
 #, no-wrap
 msgid "Applying Patches"
 msgstr "パッチをあてる"
 
 #. type: Plain text
-#: ../README.md:106
+#: ../README.md:107
 msgid ""
 "Both `rbenv install` and `ruby-build` commands support the `-p/--patch` flag "
 "to apply a patch to the Ruby source code before building. Patches are read "
@@ -871,7 +873,7 @@ msgstr ""
 "パッチは標準入力から読み取られます。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:107
+#: ../README.md:108
 #, no-wrap
 msgid ""
 "# applying a single patch\n"
@@ -893,13 +895,13 @@ msgstr ""
 "$ cat fix1.patch fix2.patch | rbenv install --patch 1.9.3-p429\n"
 
 #. type: Title ####
-#: ../README.md:118
+#: ../README.md:119
 #, no-wrap
 msgid "Checksum Verification"
 msgstr "チェックサムの検証"
 
 #. type: Plain text
-#: ../README.md:121
+#: ../README.md:122
 msgid ""
 "All Ruby definition files bundled with ruby-build include checksums for "
 "packages, meaning that all externally downloaded packages are automatically "
@@ -911,18 +913,18 @@ msgstr ""
 "性が検査されます。"
 
 #. type: Plain text
-#: ../README.md:123
+#: ../README.md:124
 msgid "See the next section for more information on how to author checksums."
 msgstr "チェックサムを施す方法についての詳細は、次節をご参照ください。"
 
 #. type: Title ####
-#: ../README.md:124
+#: ../README.md:125
 #, no-wrap
 msgid "Package Mirrors"
 msgstr "パッケージのミラー"
 
 #. type: Plain text
-#: ../README.md:128
+#: ../README.md:129
 msgid ""
 "To speed up downloads, ruby-build fetches package files from a mirror hosted "
 "on Amazon CloudFront. To benefit from this, the packages must specify their "
@@ -934,7 +936,7 @@ msgstr ""
 "ん。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:129
+#: ../README.md:130
 #, no-wrap
 msgid ""
 "# example:\n"
@@ -944,7 +946,7 @@ msgstr ""
 "install_package \"ruby-2.6.5\" \"https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>\"\n"
 
 #. type: Plain text
-#: ../README.md:142
+#: ../README.md:143
 #, no-wrap
 msgid ""
 "ruby-build will first try to fetch this package from `$RUBY_BUILD_MIRROR_URL/<SHA2>`\n"
@@ -966,12 +968,12 @@ msgstr ""
 "- `RUBY_BUILD_SKIP_MIRROR`が有効のとき\n"
 
 #. type: Plain text
-#: ../README.md:144
+#: ../README.md:145
 msgid "You may specify a custom mirror by setting `RUBY_BUILD_MIRROR_URL`."
 msgstr "`RUBY_BUILD_MIRROR_URL`を設定して独自のミラーを指定できます。"
 
 #. type: Plain text
-#: ../README.md:148
+#: ../README.md:149
 msgid ""
 "If a mirror site doesn't conform to the above URL format, you can specify "
 "the complete URL by setting `RUBY_BUILD_MIRROR_PACKAGE_URL`. It behaves the "
@@ -982,7 +984,7 @@ msgstr ""
 "完全なURLである点を除き、`RUBY_BUILD_MIRROR_URL`と同じはたらきをします。"
 
 #. type: Plain text
-#: ../README.md:151
+#: ../README.md:152
 msgid ""
 "The default ruby-build download mirror is sponsored by [Basecamp](https://"
 "basecamp.com/)."
@@ -991,13 +993,13 @@ msgstr ""
 "を受けています。"
 
 #. type: Title ####
-#: ../README.md:152
+#: ../README.md:153
 #, no-wrap
 msgid "Keeping the build directory after installation"
 msgstr "インストール後もビルドディレクトリを保持する"
 
 #. type: Plain text
-#: ../README.md:157
+#: ../README.md:158
 msgid ""
 "Both `ruby-build` and `rbenv install` accept the `-k` or `--keep` flag, "
 "which tells ruby-build to keep the downloaded source after installation. "
@@ -1010,7 +1012,7 @@ msgstr ""
 "ん。"
 
 #. type: Plain text
-#: ../README.md:162
+#: ../README.md:163
 msgid ""
 "Source code will be kept in a parallel directory tree `~/.rbenv/sources` "
 "when using `--keep` with the `rbenv install` command. You should specify the "
@@ -1023,20 +1025,20 @@ msgstr ""
 "所を指定するべきです。"
 
 #. type: Title ##
-#: ../README.md:163
+#: ../README.md:164
 #, no-wrap
 msgid "Getting Help"
 msgstr "困ったときは"
 
 #. type: Plain text
-#: ../README.md:166
+#: ../README.md:167
 msgid ""
 "Please see the [ruby-build wiki][wiki] for solutions to common problems."
 msgstr ""
 "よくある問題への解決策については[ruby-buildのウィキ][wiki]をご参照ください。"
 
 #. type: Plain text
-#: ../README.md:169
+#: ../README.md:170
 msgid ""
 "If you can't find an answer on the wiki, open an issue on the [issue tracker]"
 "[].  Be sure to include the full build log for build failures."
@@ -1046,34 +1048,31 @@ msgstr ""
 "必ず、ビルドで失敗したときのビルドログの全文を含めてください。"
 
 #. type: Link reference
-#: ../README.md:171
+#: ../README.md:172
 #, no-wrap
 msgid "[rbenv]: https://github.com/rbenv/rbenv#readme"
 msgstr "[rbenv]: https://github.com/gemmaro/rbenv/tree/ja/translation/ja#readme"
 
 #. type: Link reference
-#: ../README.md:172
+#: ../README.md:173
 #, no-wrap
 msgid "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 msgstr "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 
 #. type: Link reference
-#: ../README.md:173
+#: ../README.md:174
 #, no-wrap
 msgid "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 msgstr "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 
 #. type: Link reference
-#: ../README.md:174
+#: ../README.md:175
 #, no-wrap
 msgid "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 msgstr "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 
 #. type: Link reference
-#: ../README.md:175
+#: ../README.md:176
 #, no-wrap
 msgid "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
 msgstr "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
-
-#~ msgid "Usage as rbenv plugin:"
-#~ msgstr "rbenvプラグインとしての使い方"

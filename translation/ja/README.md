@@ -95,6 +95,7 @@ ruby-buildで認識されていないRubyのバージョンをインストール
 | `RUBY_BUILD_TARBALL_OVERRIDE`   | rubyのtarballを取得してくるためのURLを上塗りします。`#checksum`を付けられます。             |
 | `RUBY_BUILD_DEFINITIONS`        | コロン区切りのパスのリストであり、ビルド定義ファイルを探索する場所です。                              |
 | `RUBY_BUILD_ROOT`               | ビルド定義ファイルを探索するパスの接頭辞です。*廃止されました：*`RUBY_BUILD_DEFINITIONS`をお使いください|
+| `RUBY_BUILD_VENDOR_OPENSSL`     | システムのopensslに互換性があったとしても、opensslをビルドしてそれを使います                                |
 | `CC`                            | Cコンパイラへのパスです。                                                                          |
 | `RUBY_CFLAGS`                   | `CFLAGS`への追加オプションです（*例*として`-O3`を上塗りできます）。                                         |
 | `CONFIGURE_OPTS`                | `./configure`の追加オプションです。                                                                |
