@@ -16,3 +16,9 @@ ja/share/man/man1/ruby-build.1.adoc: ../share/man/man1/ruby-build.1.adoc po/ja.p
 
 po/en.pot:
 	touch $@
+
+remotes:
+	git remote | grep mainstream \
+		|| git remote add mainstream https://github.com/rbenv/ruby-build
+	git remote --verbose
+.PHONY: remotes
