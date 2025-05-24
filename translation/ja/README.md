@@ -72,7 +72,29 @@ Homebrewでインストールされたlibyamlやreadlineといったライブラ
 
 #### 独自のビルド定義
 
-ruby-buildで認識されていないRubyのバージョンをインストールするには、Rubyのバージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。
+ruby-buildで使えないRubyのバージョンをインストールするには、該当するRubyのバージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。
+
+```sh
+# 独立したプログラムとして
+$ ruby-build -d /path/to/3.4-custom /opt/rubies  # /opt/rubies/3.4-custom にインストール
+
+# rbenvのプラグインとして
+$ rbenv install /path/to/3.4-custom              # $(rbenv root)/versions/3.4-custom にインストール
+```
+
+独自のビルド定義ファイルの _ディレクトリ_ を与えることもできます。
+ruby-buildに付属する `share/ruby-build/`
+ディレクトリと共に、パスが探されます（もしかすると、サードパーティのビルド定義の集まりがgitリポジトリとして公開されたり、組織の独自のビルド定義が組織内部で配布されたりするかもしれません）。
+
+```sh
+# 独立したプログラムとして
+$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs ruby-build --definitions              # 使用できる全てのRubyのバージョンを一覧にします。独自の定義も含みます
+$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs ruby-build -d 3.5-custom /opt/rubies  # /opt/rubies/3.5-custom にインストール
+
+# rbenvのプラグインとして
+$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install --list                  # 使用できる全てのRubyのバージョンを一覧にします。独自の定義も含みます
+$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install 3.5-custom              # $(rbenv root)/versions/3.5-custom にインストール
+```
 
 [既定のビルド定義][definitions]をご確認いただくと、定義ファイルの書き方の例があります。
 

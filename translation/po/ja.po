@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ruby-build\n"
-"POT-Creation-Date: 2024-11-14 06:56+0900\n"
-"PO-Revision-Date: 2024-11-14 06:59+0900\n"
+"POT-Creation-Date: 2025-05-25 06:36+0900\n"
+"PO-Revision-Date: 2025-05-25 06:43+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -766,15 +766,61 @@ msgstr "独自のビルド定義"
 #. type: Plain text
 #: ../README.md:69
 msgid ""
-"To install a version of Ruby that is not recognized by ruby-build, you can "
+"To install a version of Ruby that is not available in ruby-build, you can "
 "specify the path to a custom build definition file in place of a Ruby "
 "version number."
+msgstr "ruby-buildで使えないRubyのバージョンをインストールするには、該当するRubyのバージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。"
+
+#. type: Fenced code block (sh)
+#: ../README.md:70
+#, no-wrap
+msgid ""
+"# As a standalone program\n"
+"$ ruby-build -d /path/to/3.4-custom /opt/rubies  # installs to /opt/rubies/3.4-custom\n"
+"\n"
+"# As an rbenv plugin\n"
+"$ rbenv install /path/to/3.4-custom              # installs to $(rbenv root)/versions/3.4-custom\n"
 msgstr ""
-"ruby-buildで認識されていないRubyのバージョンをインストールするには、Rubyの"
-"バージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。"
+"# 独立したプログラムとして\n"
+"$ ruby-build -d /path/to/3.4-custom /opt/rubies  # /opt/rubies/3.4-custom にインストール\n"
+"\n"
+"# rbenvのプラグインとして\n"
+"$ rbenv install /path/to/3.4-custom              # $(rbenv root)/versions/3.4-custom にインストール\n"
 
 #. type: Plain text
-#: ../README.md:71
+#: ../README.md:82
+msgid ""
+"You can also provide a _directory_ of custom build definition files.  The "
+"path(s) will be searched along with ruby-build's bundled `share/ruby-build/` "
+"directory.  (Perhaps a collection of 3rd-party build definitions published "
+"as a git repo, or an organization's custom build definitions distributed in-"
+"house.)"
+msgstr ""
+"独自のビルド定義ファイルの _ディレクトリ_ を与えることもできます。\n"
+"ruby-buildに付属する `share/ruby-build/` ディレクトリと共に、パスが探されます（もしかすると、サードパーティのビルド定義の集まりがgitリポジトリとして公開されたり、組織の独自のビルド定義が組織内部で配布されたりするかもしれません）。"
+
+#. type: Fenced code block (sh)
+#: ../README.md:83
+#, no-wrap
+msgid ""
+"# As a standalone program\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs ruby-build --definitions              # lists all available versions of Ruby, including custom defs\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs ruby-build -d 3.5-custom /opt/rubies  # installs to /opt/rubies/3.5-custom\n"
+"\n"
+"# As an rbenv plugin\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install --list                  # lists all available versions of Ruby, including custom defs\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install 3.5-custom              # installs to $(rbenv root)/versions/3.5-custom\n"
+msgstr ""
+"# 独立したプログラムとして\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs ruby-build --definitions              # 使用できる全てのRubyのバージョンを一覧にします。独自の定義も含みます\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs ruby-build -d 3.5-custom /opt/rubies  # /opt/rubies/3.5-custom にインストール\n"
+"\n"
+"# rbenvのプラグインとして\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install --list                  # 使用できる全てのRubyのバージョンを一覧にします。独自の定義も含みます\n"
+"$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install 3.5-custom              # $(rbenv root)/versions/3.5-custom にインストール\n"
+
+#. type: Plain text
+#: ../README.md:94
 msgid ""
 "Check out [default build definitions][definitions] as examples on how to "
 "write definition files."
@@ -783,20 +829,20 @@ msgstr ""
 "あります。"
 
 #. type: Title ####
-#: ../README.md:72
+#: ../README.md:95
 #, no-wrap
 msgid "Custom Build Configuration"
 msgstr "独自のビルド構成"
 
 #. type: Plain text
-#: ../README.md:75
+#: ../README.md:98
 msgid ""
 "The build process may be configured through the following environment "
 "variables:"
 msgstr "ビルド過程は、以下の環境変数を通じて構成できます。"
 
 #. type: Plain text
-#: ../README.md:103
+#: ../README.md:126
 #, no-wrap
 msgid ""
 "| Variable                        | Function                                                                                         |\n"
@@ -856,13 +902,13 @@ msgstr ""
 "| `CLICOLOR_FORCE`                | 端末に接続していないときでも、出力でANSIの色彩を使います。                                 |\n"
 
 #. type: Title ####
-#: ../README.md:104
+#: ../README.md:127
 #, no-wrap
 msgid "Applying Patches"
 msgstr "パッチをあてる"
 
 #. type: Plain text
-#: ../README.md:107
+#: ../README.md:130
 msgid ""
 "Both `rbenv install` and `ruby-build` commands support the `-p/--patch` flag "
 "to apply a patch to the Ruby source code before building. Patches are read "
@@ -873,7 +919,7 @@ msgstr ""
 "パッチは標準入力から読み取られます。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:108
+#: ../README.md:131
 #, no-wrap
 msgid ""
 "# applying a single patch\n"
@@ -895,13 +941,13 @@ msgstr ""
 "$ cat fix1.patch fix2.patch | rbenv install --patch 1.9.3-p429\n"
 
 #. type: Title ####
-#: ../README.md:119
+#: ../README.md:142
 #, no-wrap
 msgid "Checksum Verification"
 msgstr "チェックサムの検証"
 
 #. type: Plain text
-#: ../README.md:122
+#: ../README.md:145
 msgid ""
 "All Ruby definition files bundled with ruby-build include checksums for "
 "packages, meaning that all externally downloaded packages are automatically "
@@ -913,18 +959,18 @@ msgstr ""
 "性が検査されます。"
 
 #. type: Plain text
-#: ../README.md:124
+#: ../README.md:147
 msgid "See the next section for more information on how to author checksums."
 msgstr "チェックサムを施す方法についての詳細は、次節をご参照ください。"
 
 #. type: Title ####
-#: ../README.md:125
+#: ../README.md:148
 #, no-wrap
 msgid "Package Mirrors"
 msgstr "パッケージのミラー"
 
 #. type: Plain text
-#: ../README.md:129
+#: ../README.md:152
 msgid ""
 "To speed up downloads, ruby-build fetches package files from a mirror hosted "
 "on Amazon CloudFront. To benefit from this, the packages must specify their "
@@ -936,7 +982,7 @@ msgstr ""
 "ん。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:130
+#: ../README.md:153
 #, no-wrap
 msgid ""
 "# example:\n"
@@ -946,7 +992,7 @@ msgstr ""
 "install_package \"ruby-2.6.5\" \"https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>\"\n"
 
 #. type: Plain text
-#: ../README.md:143
+#: ../README.md:166
 #, no-wrap
 msgid ""
 "ruby-build will first try to fetch this package from `$RUBY_BUILD_MIRROR_URL/<SHA2>`\n"
@@ -968,12 +1014,12 @@ msgstr ""
 "- `RUBY_BUILD_SKIP_MIRROR`が有効のとき\n"
 
 #. type: Plain text
-#: ../README.md:145
+#: ../README.md:168
 msgid "You may specify a custom mirror by setting `RUBY_BUILD_MIRROR_URL`."
 msgstr "`RUBY_BUILD_MIRROR_URL`を設定して独自のミラーを指定できます。"
 
 #. type: Plain text
-#: ../README.md:149
+#: ../README.md:172
 msgid ""
 "If a mirror site doesn't conform to the above URL format, you can specify "
 "the complete URL by setting `RUBY_BUILD_MIRROR_PACKAGE_URL`. It behaves the "
@@ -984,7 +1030,7 @@ msgstr ""
 "完全なURLである点を除き、`RUBY_BUILD_MIRROR_URL`と同じはたらきをします。"
 
 #. type: Plain text
-#: ../README.md:152
+#: ../README.md:175
 msgid ""
 "The default ruby-build download mirror is sponsored by [Basecamp](https://"
 "basecamp.com/)."
@@ -993,13 +1039,13 @@ msgstr ""
 "を受けています。"
 
 #. type: Title ####
-#: ../README.md:153
+#: ../README.md:176
 #, no-wrap
 msgid "Keeping the build directory after installation"
 msgstr "インストール後もビルドディレクトリを保持する"
 
 #. type: Plain text
-#: ../README.md:158
+#: ../README.md:181
 msgid ""
 "Both `ruby-build` and `rbenv install` accept the `-k` or `--keep` flag, "
 "which tells ruby-build to keep the downloaded source after installation. "
@@ -1012,7 +1058,7 @@ msgstr ""
 "ん。"
 
 #. type: Plain text
-#: ../README.md:163
+#: ../README.md:186
 msgid ""
 "Source code will be kept in a parallel directory tree `~/.rbenv/sources` "
 "when using `--keep` with the `rbenv install` command. You should specify the "
@@ -1025,20 +1071,20 @@ msgstr ""
 "所を指定するべきです。"
 
 #. type: Title ##
-#: ../README.md:164
+#: ../README.md:187
 #, no-wrap
 msgid "Getting Help"
 msgstr "困ったときは"
 
 #. type: Plain text
-#: ../README.md:167
+#: ../README.md:190
 msgid ""
 "Please see the [ruby-build wiki][wiki] for solutions to common problems."
 msgstr ""
 "よくある問題への解決策については[ruby-buildのウィキ][wiki]をご参照ください。"
 
 #. type: Plain text
-#: ../README.md:170
+#: ../README.md:193
 msgid ""
 "If you can't find an answer on the wiki, open an issue on the [issue tracker]"
 "[].  Be sure to include the full build log for build failures."
@@ -1048,31 +1094,31 @@ msgstr ""
 "必ず、ビルドで失敗したときのビルドログの全文を含めてください。"
 
 #. type: Link reference
-#: ../README.md:172
+#: ../README.md:195
 #, no-wrap
 msgid "[rbenv]: https://github.com/rbenv/rbenv#readme"
 msgstr "[rbenv]: https://github.com/gemmaro/rbenv/tree/ja/translation/ja#readme"
 
 #. type: Link reference
-#: ../README.md:173
+#: ../README.md:196
 #, no-wrap
 msgid "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 msgstr "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 
 #. type: Link reference
-#: ../README.md:174
+#: ../README.md:197
 #, no-wrap
 msgid "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 msgstr "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 
 #. type: Link reference
-#: ../README.md:175
+#: ../README.md:198
 #, no-wrap
 msgid "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 msgstr "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 
 #. type: Link reference
-#: ../README.md:176
+#: ../README.md:199
 #, no-wrap
 msgid "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
 msgstr "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
