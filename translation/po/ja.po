@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ruby-build\n"
-"POT-Creation-Date: 2025-05-25 06:36+0900\n"
-"PO-Revision-Date: 2025-05-25 06:43+0900\n"
+"POT-Creation-Date: 2025-09-20 09:58+0900\n"
+"PO-Revision-Date: 2025-09-20 10:02+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -769,7 +769,9 @@ msgid ""
 "To install a version of Ruby that is not available in ruby-build, you can "
 "specify the path to a custom build definition file in place of a Ruby "
 "version number."
-msgstr "ruby-buildで使えないRubyのバージョンをインストールするには、該当するRubyのバージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。"
+msgstr ""
+"ruby-buildで使えないRubyのバージョンをインストールするには、該当するRubyの"
+"バージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。"
 
 #. type: Fenced code block (sh)
 #: ../README.md:70
@@ -797,7 +799,9 @@ msgid ""
 "house.)"
 msgstr ""
 "独自のビルド定義ファイルの _ディレクトリ_ を与えることもできます。\n"
-"ruby-buildに付属する `share/ruby-build/` ディレクトリと共に、パスが探されます（もしかすると、サードパーティのビルド定義の集まりがgitリポジトリとして公開されたり、組織の独自のビルド定義が組織内部で配布されたりするかもしれません）。"
+"ruby-buildに付属する `share/ruby-build/` ディレクトリと共に、パスが探されます"
+"（もしかすると、サードパーティのビルド定義の集まりがgitリポジトリとして公開さ"
+"れたり、組織の独自のビルド定義が組織内部で配布されたりするかもしれません）。"
 
 #. type: Fenced code block (sh)
 #: ../README.md:83
@@ -970,29 +974,31 @@ msgid "Package Mirrors"
 msgstr "パッケージのミラー"
 
 #. type: Plain text
-#: ../README.md:152
+#: ../README.md:153
 msgid ""
-"To speed up downloads, ruby-build fetches package files from a mirror hosted "
-"on Amazon CloudFront. To benefit from this, the packages must specify their "
-"checksum:"
+"You may specify a custom mirror by setting `RUBY_BUILD_MIRROR_URL`. When "
+"set, ruby-build will first attempt to download packages from the mirror "
+"before falling back to the original URL."
 msgstr ""
-"ダウンロードを高速にするため、ruby-buildはパッケージファイルをAmazon "
-"CloudFrontでホストされているミラーから取得します。\n"
-"この高速化を享受するため、パッケージにはチェックサムを指定しなければなりませ"
-"ん。"
+"`RUBY_BUILD_MIRROR_URL`を設定して、独自のミラーを指定できます。\n"
+"設定したときは、まずミラーからパッケージのダウンロードを試み、それから元のURLにフォールバックします。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:153
+#: ../README.md:154
 #, no-wrap
 msgid ""
 "# example:\n"
+"export RUBY_BUILD_MIRROR_URL=\"https://my-mirror.example.com\"\n"
 "install_package \"ruby-2.6.5\" \"https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>\"\n"
+"# Will first try: https://my-mirror.example.com/<SHA2>\n"
 msgstr ""
 "# 例：\n"
+"export RUBY_BUILD_MIRROR_URL=\"https://my-mirror.example.com\"\n"
 "install_package \"ruby-2.6.5\" \"https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>\"\n"
+"# こうすると、まず https://my-mirror.example.com/<SHA2> を試します\n"
 
 #. type: Plain text
-#: ../README.md:166
+#: ../README.md:169
 #, no-wrap
 msgid ""
 "ruby-build will first try to fetch this package from `$RUBY_BUILD_MIRROR_URL/<SHA2>`\n"
@@ -1014,12 +1020,7 @@ msgstr ""
 "- `RUBY_BUILD_SKIP_MIRROR`が有効のとき\n"
 
 #. type: Plain text
-#: ../README.md:168
-msgid "You may specify a custom mirror by setting `RUBY_BUILD_MIRROR_URL`."
-msgstr "`RUBY_BUILD_MIRROR_URL`を設定して独自のミラーを指定できます。"
-
-#. type: Plain text
-#: ../README.md:172
+#: ../README.md:173
 msgid ""
 "If a mirror site doesn't conform to the above URL format, you can specify "
 "the complete URL by setting `RUBY_BUILD_MIRROR_PACKAGE_URL`. It behaves the "
@@ -1029,23 +1030,14 @@ msgstr ""
 "`RUBY_BUILD_MIRROR_PACKAGE_URL`を設定して完全なURLを指定できます。\n"
 "完全なURLである点を除き、`RUBY_BUILD_MIRROR_URL`と同じはたらきをします。"
 
-#. type: Plain text
-#: ../README.md:175
-msgid ""
-"The default ruby-build download mirror is sponsored by [Basecamp](https://"
-"basecamp.com/)."
-msgstr ""
-"既定のruby-buildのダウンロードミラーは[Basecamp](https://basecamp.com/)の支援"
-"を受けています。"
-
 #. type: Title ####
-#: ../README.md:176
+#: ../README.md:174
 #, no-wrap
 msgid "Keeping the build directory after installation"
 msgstr "インストール後もビルドディレクトリを保持する"
 
 #. type: Plain text
-#: ../README.md:181
+#: ../README.md:179
 msgid ""
 "Both `ruby-build` and `rbenv install` accept the `-k` or `--keep` flag, "
 "which tells ruby-build to keep the downloaded source after installation. "
@@ -1058,7 +1050,7 @@ msgstr ""
 "ん。"
 
 #. type: Plain text
-#: ../README.md:186
+#: ../README.md:184
 msgid ""
 "Source code will be kept in a parallel directory tree `~/.rbenv/sources` "
 "when using `--keep` with the `rbenv install` command. You should specify the "
@@ -1071,20 +1063,20 @@ msgstr ""
 "所を指定するべきです。"
 
 #. type: Title ##
-#: ../README.md:187
+#: ../README.md:185
 #, no-wrap
 msgid "Getting Help"
 msgstr "困ったときは"
 
 #. type: Plain text
-#: ../README.md:190
+#: ../README.md:188
 msgid ""
 "Please see the [ruby-build wiki][wiki] for solutions to common problems."
 msgstr ""
 "よくある問題への解決策については[ruby-buildのウィキ][wiki]をご参照ください。"
 
 #. type: Plain text
-#: ../README.md:193
+#: ../README.md:191
 msgid ""
 "If you can't find an answer on the wiki, open an issue on the [issue tracker]"
 "[].  Be sure to include the full build log for build failures."
@@ -1094,31 +1086,59 @@ msgstr ""
 "必ず、ビルドで失敗したときのビルドログの全文を含めてください。"
 
 #. type: Link reference
-#: ../README.md:195
+#: ../README.md:193
 #, no-wrap
 msgid "[rbenv]: https://github.com/rbenv/rbenv#readme"
 msgstr "[rbenv]: https://github.com/gemmaro/rbenv/tree/ja/translation/ja#readme"
 
 #. type: Link reference
-#: ../README.md:196
+#: ../README.md:194
 #, no-wrap
 msgid "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 msgstr "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 
 #. type: Link reference
-#: ../README.md:197
+#: ../README.md:195
 #, no-wrap
 msgid "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 msgstr "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 
 #. type: Link reference
-#: ../README.md:198
+#: ../README.md:196
 #, no-wrap
 msgid "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 msgstr "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 
 #. type: Link reference
-#: ../README.md:199
+#: ../README.md:197
 #, no-wrap
 msgid "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
 msgstr "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
+
+#~ msgid ""
+#~ "To speed up downloads, ruby-build fetches package files from a mirror "
+#~ "hosted on Amazon CloudFront. To benefit from this, the packages must "
+#~ "specify their checksum:"
+#~ msgstr ""
+#~ "ダウンロードを高速にするため、ruby-buildはパッケージファイルをAmazon "
+#~ "CloudFrontでホストされているミラーから取得します。\n"
+#~ "この高速化を享受するため、パッケージにはチェックサムを指定しなければなりま"
+#~ "せん。"
+
+#, no-wrap
+#~ msgid ""
+#~ "# example:\n"
+#~ "install_package \"ruby-2.6.5\" \"https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>\"\n"
+#~ msgstr ""
+#~ "# 例：\n"
+#~ "install_package \"ruby-2.6.5\" \"https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>\"\n"
+
+#~ msgid "You may specify a custom mirror by setting `RUBY_BUILD_MIRROR_URL`."
+#~ msgstr "`RUBY_BUILD_MIRROR_URL`を設定して独自のミラーを指定できます。"
+
+#~ msgid ""
+#~ "The default ruby-build download mirror is sponsored by [Basecamp](https://"
+#~ "basecamp.com/)."
+#~ msgstr ""
+#~ "既定のruby-buildのダウンロードミラーは[Basecamp](https://basecamp.com/)の"
+#~ "支援を受けています。"

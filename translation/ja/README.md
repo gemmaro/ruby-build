@@ -156,12 +156,14 @@ ruby-buildに付属する全てのRubyの定義ファイルにはパッケージ
 
 #### パッケージのミラー
 
-ダウンロードを高速にするため、ruby-buildはパッケージファイルをAmazon CloudFrontでホストされているミラーから取得します。
-この高速化を享受するため、パッケージにはチェックサムを指定しなければなりません。
+`RUBY_BUILD_MIRROR_URL`を設定して、独自のミラーを指定できます。
+設定したときは、まずミラーからパッケージのダウンロードを試み、それから元のURLにフォールバックします。
 
 ```sh
 # 例：
+export RUBY_BUILD_MIRROR_URL="https://my-mirror.example.com"
 install_package "ruby-2.6.5" "https://ruby-lang.org/ruby-2.6.5.tgz#<SHA2>"
+# こうすると、まず https://my-mirror.example.com/<SHA2> を試します
 ```
 
 ruby-buildではまず、このパッケージを`$RUBY_BUILD_MIRROR_URL/<SHA2>`から取得することを試みます（補足：これは完全なURLです）。
@@ -173,12 +175,8 @@ ruby-buildではまず、このパッケージを`$RUBY_BUILD_MIRROR_URL/<SHA2>`
 - チェックサムを計算できるツールがないとき
 - `RUBY_BUILD_SKIP_MIRROR`が有効のとき
 
-`RUBY_BUILD_MIRROR_URL`を設定して独自のミラーを指定できます。
-
 ミラーサイトが上記のURLの形式に準拠していないとき、`RUBY_BUILD_MIRROR_PACKAGE_URL`を設定して完全なURLを指定できます。
 完全なURLである点を除き、`RUBY_BUILD_MIRROR_URL`と同じはたらきをします。
-
-既定のruby-buildのダウンロードミラーは[Basecamp](https://basecamp.com/)の支援を受けています。
 
 #### インストール後もビルドディレクトリを保持する
 
