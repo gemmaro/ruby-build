@@ -5,8 +5,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: ruby-build\n"
-"POT-Creation-Date: 2025-09-20 09:58+0900\n"
-"PO-Revision-Date: 2025-09-20 10:02+0900\n"
+"POT-Creation-Date: 2026-08-09 14:58+0900\n"
+"PO-Revision-Date: 2026-08-09 15:32+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -44,25 +44,27 @@ msgid "Synopsis"
 msgstr "処方"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:17
+#: ../share/man/man1/ruby-build.1.adoc:18
 #, no-wrap
 msgid ""
 "ruby-build [-dvpk] _<definition>_ _<prefix>_ [-- _<configure-args>_...]\n"
 "ruby-build {--list|--definitions}\n"
+"ruby-build --resolve _<version>_\n"
 "ruby-build --version"
 msgstr ""
-"ruby-build [-dvpk] _＜定義＞_ _＜プレフィックス＞_ [-- _＜構成引数＞_...]\n"
+"ruby-build [-dvpk] _＜定義＞_ _＜接頭辞＞_ [-- _＜構成引数＞_...]\n"
 "ruby-build {--list|--definitions}\n"
+"ruby-build --resolve _＜版＞_\n"
 "ruby-build --version"
 
 #. type: Title ==
-#: ../share/man/man1/ruby-build.1.adoc:18
+#: ../share/man/man1/ruby-build.1.adoc:19
 #, no-wrap
 msgid "Description"
 msgstr "説明"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:22
+#: ../share/man/man1/ruby-build.1.adoc:23
 msgid ""
 "ruby-build downloads, compiles, and installs a Ruby version named by the "
 "_definition_ argument into the location specified by _prefix_."
@@ -71,16 +73,7 @@ msgstr ""
 "定された場所へ、ダウンロード、コンパイル、インストールします。"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:25
-msgid ""
-"The _definition_ argument can optionally start with \"ruby-\", in which case "
-"it resolves to a CRuby that matches the version number that follows."
-msgstr ""
-"_定義_ 引数は「ruby-」始まりにもできます。\n"
-"この場合、それに続くバージョン番号に合致するCRubyに解決されます。"
-
-#. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:28
+#: ../share/man/man1/ruby-build.1.adoc:26
 msgid ""
 "The _definition_ argument can be a path to a file on disk, in which case it "
 "is sourced into ruby-build as a bash script."
@@ -89,7 +82,7 @@ msgstr ""
 "この場合、bashスクリプトとしてruby-buildにソースが読み込まれます。"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:31
+#: ../share/man/man1/ruby-build.1.adoc:29
 msgid ""
 "Optionally, extra Ruby _configure-args_ may be listed after \"--\" and will "
 "get forwarded to the `./configure` invocation."
@@ -98,7 +91,7 @@ msgstr ""
 "このようにすると、 `./configure` の呼出しへ転送されます。"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:35
+#: ../share/man/man1/ruby-build.1.adoc:33
 msgid ""
 "By default, all compile output is redirected to a log file at `$TMPDIR/ruby-"
 "build.*.log`. Activate the verbose mode to skip the log file and print "
@@ -109,55 +102,151 @@ msgstr ""
 "冗長モードを有効にするとログファイルへの書き込みはスキップし、全て標準スト"
 "リームに印字します。"
 
+#. type: Title ###
+#: ../share/man/man1/ruby-build.1.adoc:34 ../README.md:66
+#, no-wrap
+msgid "Ruby versions"
+msgstr "Rubyの版"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:41
+msgid ""
+"When listing \"latest\" Ruby versions, such as in `--list` output, ruby-"
+"build only knows of Ruby versions that are bundled with this project.  That "
+"means that when a new Ruby version comes out, ruby-build will not know about "
+"it immediately; you will have to upgrade ruby-build before you can use it to "
+"install the new Ruby version."
+msgstr ""
+"`--list`の出力のように、「最新の」Rubyの版を一覧するとき、ruby-buildはこのプロジェクトに付属するRubyの版しか知りません。\n"
+"つまり新しいRubyの版が出たとき、ruby-buildは直ちにはそれについて知らないでしょう。\n"
+"その新しいRubyの版をインストールするためにはruby-buildを更新しなければ使えません。"
+
+#. type: Title ###
+#: ../share/man/man1/ruby-build.1.adoc:42 ../README.md:72
+#, no-wrap
+msgid "Ruby implementations"
+msgstr "Rubyの実装"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:45
+msgid ""
+"ruby-build ships with definitions for the following Ruby implementations:"
+msgstr "ruby-buildは以下のRubyの実装について定義を備えています。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:48
+msgid ""
+"CRuby, also known as \"MRI\": denoted by version numbers in form of "
+"\"X.Y.Z\".  This is the main Ruby implementation that most people use."
+msgstr ""
+"CRuby、または「MRI」としても知られるもの：「X.Y.Z」の形式の版番号で記されます。\n"
+"これはほとんどの人々が使う主要なRubyの実装です。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:51
+msgid ""
+"\"jruby\": High-performance Ruby implementation with real threading built on "
+"top of the Java virtual machine (JVM)."
+msgstr "\"jruby\"：高性能なRubyの実装で、Java仮想マシン (Java Virtual Machine; JVM) を土台に本物のスレッドが付いています。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:53
+msgid "\"mruby\": Lightweight Ruby for microcontrollers."
+msgstr "\"mruby\"：マイクロコントローラ用の軽量Ruby。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:55
+msgid ""
+"\"picoruby\": Alternative mruby implementation for one-chip microcontrollers."
+msgstr "\"picoruby\"：1チップマイクロコントローラ用の代替のmruby実装。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:58
+msgid ""
+"\"truffleruby\": The Native standalone distribution of TruffleRuby, an "
+"implementation of Ruby on top of GraalVM's Truffle framework."
+msgstr "\"truffleruby\"：ネイティブの独立したTruffleRubyの頒布物で、GraalVMのTruffleフレームワークを土台にしたRubyの実装。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:60
+msgid ""
+"\"truffleruby+graalvm\": The JVM standalone distribution of TruffleRuby."
+msgstr "\"truffleruby+graalvm\"：TruffleRubyのJVMの独立した頒布物。"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:66
+msgid ""
+"The _definition_ argument may optionally start with \"ruby-\", in which case "
+"it resolves to a CRuby that matches the version number that follows. The "
+"_definition_ argument may also be a name of one of the alternative Ruby "
+"implementations, in which case the latest version of that implementation "
+"will be installed."
+msgstr ""
+"_定義_ 引数は随意で「ruby-」から始めても構わず、その場合は後に続く版番号に合致するCRubyに解決されます。\n"
+"_定義_ 引数は代替のRubyの実装のいずれかの名前にしても構わず、その場合その実装の最新版がインストールされます。"
+
 #. type: Title ==
-#: ../share/man/man1/ruby-build.1.adoc:36
+#: ../share/man/man1/ruby-build.1.adoc:67
 #, no-wrap
 msgid "Options"
 msgstr "オプション"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:38
+#: ../share/man/man1/ruby-build.1.adoc:69
 #, no-wrap
 msgid "*-l, --list*"
 msgstr "*-l, --list*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:40
+#: ../share/man/man1/ruby-build.1.adoc:71
 msgid "List latest stable releases for each Ruby"
 msgstr "Rubyの最新の安定リリースが、各行に一覧で表示されます"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:41
+#: ../share/man/man1/ruby-build.1.adoc:72
 #, no-wrap
 msgid "*--definitions*"
 msgstr "*--definitions*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:43
+#: ../share/man/man1/ruby-build.1.adoc:74
 msgid "List all local definitions, including outdated ones"
 msgstr ""
 "全てのローカルの定義を一覧にします。\n"
 "期限切れのものも含まれます。"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:44
+#: ../share/man/man1/ruby-build.1.adoc:75
+#, no-wrap
+msgid "*--resolve*"
+msgstr "*--resolve*"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:77
+msgid ""
+"Print the definition name of the latest stable Ruby version matching the "
+"_version_ argument"
+msgstr "_版_ 引数に合致する最新安定なRubyの版の定義名を印字"
+
+#. type: Labeled list
+#: ../share/man/man1/ruby-build.1.adoc:78
 #, no-wrap
 msgid "*--version*"
 msgstr "*--version*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:46
+#: ../share/man/man1/ruby-build.1.adoc:80
 msgid "Show version of ruby-build"
 msgstr "ruby-buildのバージョンを表示します"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:47
+#: ../share/man/man1/ruby-build.1.adoc:81
 #, no-wrap
 msgid "*-d, --dir*"
 msgstr "*-d, --dir*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:49
+#: ../share/man/man1/ruby-build.1.adoc:83
 msgid ""
 "Install the Ruby in the _prefix/definition_ destination instead of directly "
 "in _prefix_"
@@ -166,229 +255,240 @@ msgstr ""
 "Rubyをインストールするようにします。"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:50
+#: ../share/man/man1/ruby-build.1.adoc:84
 #, no-wrap
 msgid "*-v, --verbose*"
 msgstr "*-v, --verbose*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:52
+#: ../share/man/man1/ruby-build.1.adoc:86
 msgid "Verbose mode: forward all build output to stdout/stderr"
 msgstr ""
 "冗長モードです。\n"
 "ビルド時の出力を標準入力と標準エラーに転送します"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:53
+#: ../share/man/man1/ruby-build.1.adoc:87
 #, no-wrap
 msgid "*-p, --patch*"
 msgstr "*-p, --patch*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:55
+#: ../share/man/man1/ruby-build.1.adoc:89
 msgid "Apply a patch from stdin before building"
 msgstr "ビルド前に標準入力からパッチを適用します"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:56
+#: ../share/man/man1/ruby-build.1.adoc:90
 #, no-wrap
 msgid "*-k, --keep*"
 msgstr "*-k, --keep*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:58
+#: ../share/man/man1/ruby-build.1.adoc:92
 msgid "Do not remove source tree after installation"
 msgstr "インストール後にソースツリーを削除しません"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:59
+#: ../share/man/man1/ruby-build.1.adoc:93
 #, no-wrap
 msgid "*-4, --ipv4*"
 msgstr "*-4, --ipv4*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:61
+#: ../share/man/man1/ruby-build.1.adoc:95
 msgid "Resolve names to IPv4 addresses only"
 msgstr "IPv4アドレスのみに名前解決します"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:62
+#: ../share/man/man1/ruby-build.1.adoc:96
 #, no-wrap
 msgid "*-6, --ipv6*"
 msgstr "*-6, --ipv6*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:64
+#: ../share/man/man1/ruby-build.1.adoc:98
 msgid "Resolve names to IPv6 addresses only"
 msgstr "IPv6アドレスのみに名前解決します"
 
 #. type: Title ==
-#: ../share/man/man1/ruby-build.1.adoc:65
+#: ../share/man/man1/ruby-build.1.adoc:99
 #, no-wrap
 msgid "Examples"
 msgstr "例"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:68
+#: ../share/man/man1/ruby-build.1.adoc:102
 msgid "Install a Ruby version while tweaking some configuration options:"
 msgstr ""
 "Rubyのバージョンをインストールします。\n"
 "ただし構成オプションを調整します。"
 
 #. type: delimited block -
-#: ../share/man/man1/ruby-build.1.adoc:70
+#: ../share/man/man1/ruby-build.1.adoc:104
 #, no-wrap
-msgid "$ ruby-build 3.2.2 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl\n"
-msgstr "$ ruby-build 3.2.2 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl\n"
+msgid "$ ruby-build 3.4.9 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl\n"
+msgstr "$ ruby-build 3.4.9 /path/to/destination -- --disable-install-doc --with-openssl-dir=/opt/openssl\n"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:73
-msgid "Install a Ruby version to `~/.rubies/ruby-3.2.2`:"
-msgstr "Rubyのバージョンを `~/.rubies/ruby-3.2.2` にインストールします。"
+#: ../share/man/man1/ruby-build.1.adoc:107
+msgid "Install a Ruby version to `~/.rubies/ruby-3.4.9`:"
+msgstr "Rubyのバージョンを`~/.rubies/ruby-3.4.9`にインストールします。"
 
 #. type: delimited block -
-#: ../share/man/man1/ruby-build.1.adoc:75
+#: ../share/man/man1/ruby-build.1.adoc:109
 #, no-wrap
-msgid "$ ruby-build --dir ruby-3.2.2 ~/.rubies\n"
-msgstr "$ ruby-build --dir ruby-3.2.2 ~/.rubies\n"
+msgid "$ ruby-build --dir ruby-3.4.9 ~/.rubies\n"
+msgstr "$ ruby-build --dir ruby-3.4.9 ~/.rubies\n"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:78
-msgid "Install a Ruby version to `~/.rbenv/versions/3.3.5`:"
-msgstr "Rubyのバージョンを `~/.rbenv/versions/3.3.5` にインストールします。"
+#: ../share/man/man1/ruby-build.1.adoc:112
+msgid "Install the latest Ruby 3.x version to `~/.rubies/ruby-3.x.y`:"
+msgstr "最新のRuby 3.x版を`~/.rubies/ruby-3.x.y`へインストール："
 
 #. type: delimited block -
-#: ../share/man/man1/ruby-build.1.adoc:80
+#: ../share/man/man1/ruby-build.1.adoc:114
 #, no-wrap
-msgid "$ ruby-build --dir 3.3.5 ~/.rbenv/versions\n"
-msgstr "$ ruby-build --dir 3.3.5 ~/.rbenv/versions\n"
+msgid "$ ruby-build --dir ruby-3 ~/.rubies\n"
+msgstr "$ ruby-build --dir ruby-3 ~/.rubies\n"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:83
+#: ../share/man/man1/ruby-build.1.adoc:117
+msgid "Install a Ruby version to `~/.rbenv/versions/3.3.11`:"
+msgstr "Rubyのバージョンを`~/.rbenv/versions/3.3.11`へインストール："
+
+#. type: delimited block -
+#: ../share/man/man1/ruby-build.1.adoc:119
+#, no-wrap
+msgid "$ ruby-build --dir 3.3.11 ~/.rbenv/versions\n"
+msgstr "$ ruby-build --dir 3.3.11 ~/.rbenv/versions\n"
+
+#. type: Plain text
+#: ../share/man/man1/ruby-build.1.adoc:122
 msgid "Usage as rbenv plugin, accomplishes the same as the previous example:"
 msgstr ""
 "rbenvプラグインとしての使い方は次の通りです。\n"
 "前の例と同じことが達成されます。"
 
 #. type: delimited block -
-#: ../share/man/man1/ruby-build.1.adoc:85
+#: ../share/man/man1/ruby-build.1.adoc:124
 #, no-wrap
-msgid "$ rbenv install 3.3.5\n"
-msgstr "$ rbenv install 3.3.5\n"
+msgid "$ rbenv install 3.3.11\n"
+msgstr "$ rbenv install 3.3.11\n"
 
 #. type: Title ==
-#: ../share/man/man1/ruby-build.1.adoc:87
+#: ../share/man/man1/ruby-build.1.adoc:126
 #, no-wrap
 msgid "Environment Variables"
 msgstr "環境変数"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:89
+#: ../share/man/man1/ruby-build.1.adoc:128
 #, no-wrap
 msgid "*TMPDIR*"
 msgstr "*TMPDIR*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:91
+#: ../share/man/man1/ruby-build.1.adoc:130
 msgid "The location to write temporary files on disk"
 msgstr "ディスク上の一時ファイルに書き込む場所"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:92
+#: ../share/man/man1/ruby-build.1.adoc:131
 #, no-wrap
 msgid "*RUBY_BUILD_BUILD_PATH* (default: a timestamped subdirectory of _TMPDIR_)"
 msgstr "*RUBY_BUILD_BUILD_PATH*（既定では _TMPDIR_ の時間記録付きの副ディレクトリです）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:94
+#: ../share/man/man1/ruby-build.1.adoc:133
 msgid "The build location for downloading source files to and compiling"
 msgstr "ソースファイルをダウンロードしてコンパイルする、ビルド場所です"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:95
+#: ../share/man/man1/ruby-build.1.adoc:134
 #, no-wrap
 msgid "*RUBY_BUILD_CACHE_PATH* (default: \"~/.rbenv/cache\" if invoked as rbenv plugin)"
 msgstr "*RUBY_BUILD_CACHE_PATH*（rbenvプラグインとして呼ばれたとき、既定では「~/.rbenv/cache」です）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:97
+#: ../share/man/man1/ruby-build.1.adoc:136
 msgid "Where to cache downloaded package files"
 msgstr "ダウンロードしたパッケージファイルをキャッシュする場所です"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:98
+#: ../share/man/man1/ruby-build.1.adoc:137
 #, no-wrap
 msgid "*RUBY_BUILD_HTTP_CLIENT* (default: first tool found in PATH)"
 msgstr "*RUBY_BUILD_HTTP_CLIENT*（既定ではPATHから見つかった最初のツールです）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:100
+#: ../share/man/man1/ruby-build.1.adoc:139
 msgid "One of \"aria2c\", \"curl\", or \"wget\" to use for downloading"
 msgstr "ダウンロードに使うもので、「aria2c」「curl」「wget」のいずれかです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:101
+#: ../share/man/man1/ruby-build.1.adoc:140
 #, no-wrap
 msgid "*RUBY_BUILD_ARIA2_OPTS*"
 msgstr "*RUBY_BUILD_ARIA2_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:103
+#: ../share/man/man1/ruby-build.1.adoc:142
 msgid "Additional options to pass to aria2c for downloading"
 msgstr "ダウンロード時にaria2cに渡す追加のオプションです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:104
+#: ../share/man/man1/ruby-build.1.adoc:143
 #, no-wrap
 msgid "*RUBY_BUILD_CURL_OPTS*"
 msgstr "*RUBY_BUILD_CURL_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:106
+#: ../share/man/man1/ruby-build.1.adoc:145
 msgid "Additional options to pass to curl for downloading"
 msgstr "ダウンロード時にcurlに渡す追加のオプションです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:107
+#: ../share/man/man1/ruby-build.1.adoc:146
 #, no-wrap
 msgid "*RUBY_BUILD_WGET_OPTS*"
 msgstr "*RUBY_BUILD_WGET_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:109
+#: ../share/man/man1/ruby-build.1.adoc:148
 msgid "Additional options to pass to wget for downloading"
 msgstr "ダウンロードでwgetに渡す追加のオプションです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:110
+#: ../share/man/man1/ruby-build.1.adoc:149
 #, no-wrap
 msgid "*RUBY_BUILD_MIRROR_URL* (default: a sponsored Amazon CloudFront mirror)"
 msgstr "*RUBY_BUILD_MIRROR_URL*（既定では、スポンサーのAmazon CloudFrontのミラーです）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:112
+#: ../share/man/man1/ruby-build.1.adoc:151
 msgid "Custom mirror URL root to download packages from"
 msgstr "パッケージをダウンロードする、独自のミラーURLのルートです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:113
+#: ../share/man/man1/ruby-build.1.adoc:152
 #, no-wrap
 msgid "*RUBY_BUILD_MIRROR_PACKAGE_URL*"
 msgstr "*RUBY_BUILD_MIRROR_PACKAGE_URL*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:115
+#: ../share/man/man1/ruby-build.1.adoc:154
 msgid "Custom complete mirror URL"
 msgstr "独自の完全なミラーURLです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:116
+#: ../share/man/man1/ruby-build.1.adoc:155
 #, no-wrap
 msgid "*RUBY_BUILD_SKIP_MIRROR*"
 msgstr "*RUBY_BUILD_SKIP_MIRROR*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:118
+#: ../share/man/man1/ruby-build.1.adoc:157
 msgid ""
 "Bypass the download mirror and fetch all package files from their original "
 "URLs"
@@ -396,24 +496,24 @@ msgstr ""
 "ダウンロードミラーを迂回し、元々のURLから全てのパッケージファイルを取得します"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:119
+#: ../share/man/man1/ruby-build.1.adoc:158
 #, no-wrap
 msgid "*RUBY_BUILD_ROOT* (default: \"share/ruby-build\" within ruby-build install location)"
 msgstr "*RUBY_BUILD_ROOT*（既定では、ruby-buildのインストール場所内の「share/ruby-build」です）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:121
+#: ../share/man/man1/ruby-build.1.adoc:160
 msgid "Custom build definition directory"
 msgstr "独自のビルド定義ディレクトリです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:122
+#: ../share/man/man1/ruby-build.1.adoc:161
 #, no-wrap
 msgid "*RUBY_BUILD_TARBALL_OVERRIDE*"
 msgstr "*RUBY_BUILD_TARBALL_OVERRIDE*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:124
+#: ../share/man/man1/ruby-build.1.adoc:163
 msgid ""
 "Override the URL to fetch the ruby tarball from, optionally followed by "
 "\"#<checksum>\""
@@ -422,157 +522,157 @@ msgstr ""
 "「#<checksum>」を後ろに付けることもできます"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:125
+#: ../share/man/man1/ruby-build.1.adoc:164
 #, no-wrap
 msgid "*RUBY_BUILD_DEFINITIONS*"
 msgstr "*RUBY_BUILD_DEFINITIONS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:127
+#: ../share/man/man1/ruby-build.1.adoc:166
 msgid "Paths to search for build definitions in addition to _RUBY_BUILD_ROOT_"
 msgstr "_RUBY_BUILD_ROOT_ に加えて、ビルド定義を探索するパスです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:128
+#: ../share/man/man1/ruby-build.1.adoc:167
 #, no-wrap
 msgid "*CC*"
 msgstr "*CC*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:130
+#: ../share/man/man1/ruby-build.1.adoc:169
 msgid "Path to the C compiler"
 msgstr "Cコンパイラへのパスです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:131
+#: ../share/man/man1/ruby-build.1.adoc:170
 #, no-wrap
 msgid "*RUBY_CFLAGS*"
 msgstr "*RUBY_CFLAGS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:133
+#: ../share/man/man1/ruby-build.1.adoc:172
 msgid "Additional `CFLAGS` options to use for Ruby compilation"
 msgstr "Rubyのコンパイルに使う追加の `CFLAGS` オプションです"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:134
+#: ../share/man/man1/ruby-build.1.adoc:173
 #, no-wrap
 msgid "*CONFIGURE_OPTS*"
 msgstr "*CONFIGURE_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:136
+#: ../share/man/man1/ruby-build.1.adoc:175
 msgid "Additional \"./configure\" arguments"
 msgstr "「./configure」の追加引数です"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:137
+#: ../share/man/man1/ruby-build.1.adoc:176
 #, no-wrap
 msgid "*MAKE* (default: \"make\")"
 msgstr "*MAKE*（既定では「make」です）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:139
+#: ../share/man/man1/ruby-build.1.adoc:178
 msgid "Custom make command (e.g., \"gmake\")"
 msgstr "独自のmakeコマンドです（例えば「gmake」）"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:140
+#: ../share/man/man1/ruby-build.1.adoc:179
 #, no-wrap
 msgid "*MAKE_OPTS*, *MAKEOPTS*"
 msgstr "*MAKE_OPTS*, *MAKEOPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:142
+#: ../share/man/man1/ruby-build.1.adoc:181
 msgid "Additional arguments for \"make\""
 msgstr "「make」への追加の引数です"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:143
+#: ../share/man/man1/ruby-build.1.adoc:182
 #, no-wrap
 msgid "*MAKE_INSTALL_OPTS*"
 msgstr "*MAKE_INSTALL_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:145
+#: ../share/man/man1/ruby-build.1.adoc:184
 msgid "Additional arguments for \"make install\""
 msgstr "「make install」への追加の引数です"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:146
+#: ../share/man/man1/ruby-build.1.adoc:185
 #, no-wrap
 msgid "*RUBY_CONFIGURE_OPTS*"
 msgstr "*RUBY_CONFIGURE_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:148
+#: ../share/man/man1/ruby-build.1.adoc:187
 msgid "Additional \"./configure\" arguments that apply only to Ruby source"
 msgstr "「./configure」への追加の引数で、Rubyのソースにのみ適用されます"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:149
+#: ../share/man/man1/ruby-build.1.adoc:188
 #, no-wrap
 msgid "*RUBY_MAKE_OPTS*"
 msgstr "*RUBY_MAKE_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:151
+#: ../share/man/man1/ruby-build.1.adoc:190
 msgid "Additional make arguments that apply only to Ruby source"
 msgstr "makeへの追加の引数で、Rubyのソースにのみ適用されます"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:152
+#: ../share/man/man1/ruby-build.1.adoc:191
 #, no-wrap
 msgid "*RUBY_MAKE_INSTALL_OPTS*"
 msgstr "*RUBY_MAKE_INSTALL_OPTS*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:154
+#: ../share/man/man1/ruby-build.1.adoc:193
 msgid "Additional \"make install\" arguments that apply only to Ruby source"
 msgstr "「make install」への追加の引数で、Rubyのソースにのみ適用されます"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:155
+#: ../share/man/man1/ruby-build.1.adoc:194
 #, no-wrap
 msgid "*NO_COLOR* (default: allow colors when connected to terminal)"
 msgstr "*NO_COLOR*（既定では、端末に接続しているときに彩色できるようにします）"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:157
+#: ../share/man/man1/ruby-build.1.adoc:196
 msgid "Disable ANSI colors in output"
 msgstr "出力でANSIの彩色を無効にします"
 
 #. type: Labeled list
-#: ../share/man/man1/ruby-build.1.adoc:158
+#: ../share/man/man1/ruby-build.1.adoc:197
 #, no-wrap
 msgid "*CLICOLOR_FORCE*"
 msgstr "*CLICOLOR_FORCE*"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:160
+#: ../share/man/man1/ruby-build.1.adoc:199
 msgid "Use ANSI colors in output even when not connected to a terminal"
 msgstr ""
 "出力でANSIの彩色を使います。\n"
 "端末に接続していない場合も該当します"
 
 #. type: Title ==
-#: ../share/man/man1/ruby-build.1.adoc:161
+#: ../share/man/man1/ruby-build.1.adoc:200
 #, no-wrap
 msgid "Notes"
 msgstr "補足"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:164
+#: ../share/man/man1/ruby-build.1.adoc:203
 msgid "https://github.com/rbenv/ruby-build#readme"
 msgstr "https://github.com/gemmaro/ruby-build/tree/ja/translation/ja#readme"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:166
+#: ../share/man/man1/ruby-build.1.adoc:205
 msgid "https://github.com/rbenv/ruby-build/wiki"
 msgstr "https://github.com/rbenv/ruby-build/wiki"
 
 #. type: Plain text
-#: ../share/man/man1/ruby-build.1.adoc:167
+#: ../share/man/man1/ruby-build.1.adoc:206
 msgid "https://github.com/rbenv/ruby-build/discussions"
 msgstr "https://github.com/rbenv/ruby-build/discussions"
 
@@ -693,23 +793,27 @@ msgid ""
 "# As a standalone program\n"
 "$ ruby-build --list                        # lists latest stable releases for each Ruby\n"
 "$ ruby-build --definitions                 # lists all definitions, including outdated ones\n"
-"$ ruby-build 3.2.2 ~/.rubies/ruby-3.2.2    # installs Ruby 3.2.2\n"
-"$ ruby-build -d ruby-3.2.2 ~/.rubies       # alternate form for the previous example\n"
+"$ ruby-build 3.4.9 ~/.rubies/ruby-3.4.9    # installs Ruby 3.4.9\n"
+"$ ruby-build -d ruby-3.4.9 ~/.rubies       # alternate form for the previous example\n"
+"$ ruby-build -d ruby-3.4 ~/.rubies         # installs latest Ruby 3.4.x\n"
 "\n"
 "# As an rbenv plugin\n"
-"$ rbenv install 3.2.2  # installs Ruby 3.2.2 to ~/.rbenv/versions/3.2.2\n"
+"$ rbenv install 3.4.9  # installs Ruby 3.4.9 to ~/.rbenv/versions/3.4.9\n"
+"$ rbenv install 3      # installs latest Ruby 3.x\n"
 msgstr ""
-"# 独立としたプログラムとしての使い方\n"
-"$ ruby-build --list                        # 最新安定リリースのRubyのバージョンの一覧\n"
-"$ ruby-build --definitions                 # 定義を一覧にします（旧版含む）\n"
-"$ ruby-build 3.2.2 /opt/rubies/ruby-3.2.2  # Ruby 3.2.2をインストールします\n"
-"$ ruby-build -d ruby-3.2.2 /opt/rubies     # 上の例の別の形式\n"
+"# 独立としたプログラムとして\n"
+"$ ruby-build --list                        # 各Rubyの最新安定リリースを一覧化\n"
+"$ ruby-build --definitions                 # 全定義を一覧化、旧版を含みます\n"
+"$ ruby-build 3.4.9 ~/.rubies/ruby-3.4.9    # Ruby 3.4.9をインストール\n"
+"$ ruby-build -d ruby-3.4.9 ~/.rubies       # 上の例の別の形式\n"
+"$ ruby-build -d ruby-3.4 ~/.rubies         # 最新のRuby 3.4.xをインストール\n"
 "\n"
-"# rbenvのプラグインとしての使い方\n"
-"$ rbenv install 3.2.2  # Ruby 3.2.2を ~/.rbenv/versions/3.2.2 へインストールします\n"
+"# rbenvのプラグインとして\n"
+"$ rbenv install 3.4.9  # Ruby 3.4.9を ~/.rbenv/versions/3.4.9 へインストール\n"
+"$ rbenv install 3      # 最新のRuby 3.xをインストール\n"
 
 #. type: Plain text
-#: ../README.md:54
+#: ../README.md:56
 #, no-wrap
 msgid ""
 "> [!WARNING]\n"
@@ -720,7 +824,7 @@ msgstr ""
 "> ビルドツールや開発ヘッダといった[全ての必須のライブラリ][build-env]が既にシステムに存在していることをお確かめください。\n"
 
 #. type: Plain text
-#: ../README.md:61
+#: ../README.md:63
 msgid ""
 "Basically, what ruby-build does when installing a Ruby version is this: - "
 "Downloads an official tarball of Ruby source code; - Extracts the archive "
@@ -737,7 +841,7 @@ msgstr ""
 "- インストールされたRubyが機能するか検証する"
 
 #. type: Plain text
-#: ../README.md:63
+#: ../README.md:65
 msgid ""
 "Depending on the context, ruby-build does a little bit more than the above: "
 "for example, it will try to link Ruby to the appropriate OpenSSL version, "
@@ -751,20 +855,91 @@ msgstr ""
 "Homebrewでインストールされたlibyamlやreadlineといったライブラリを見つけてリン"
 "クしようともします。"
 
+#. type: Plain text
+#: ../README.md:69
+msgid ""
+"When listing \"latest\" Ruby versions, such as in `ruby-build --list` "
+"output, ruby-build only knows of Ruby versions that are bundled with this "
+"project. That means that when a new Ruby version comes out, ruby-build will "
+"not know about it immediately— you will have to upgrade ruby-build before "
+"you can use it to install the new Ruby version. This is because ruby-build "
+"bundles [definition files](#custom-build-definitions) for each individual "
+"Ruby version."
+msgstr ""
+
+#. type: Plain text
+#: ../README.md:71
+msgid ""
+"If it's important to you that your installer tool always consults remote "
+"resources to download the list of latest Ruby versions (without having to "
+"upgrade the tool itself), check out [ruby-install][] as an alternative to "
+"ruby-build."
+msgstr ""
+
+#. type: Plain text
+#: ../README.md:75
+msgid ""
+"ruby-build ships with definitions for the following Ruby implementations, "
+"denoted by version prefixes in the `ruby-build --list` output:"
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../README.md:77
+msgid ""
+"[CRuby][]: listed in ruby-build as unprefixed version numbers in the `X.Y.Z` "
+"format. This is the main Ruby implementation that most people use and is "
+"also historically known as \"MRI\". ruby-build allows adding the `ruby-` "
+"prefix to CRuby version numbers for compatibility with other version "
+"managers."
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../README.md:79
+msgid ""
+"`jruby`: [JRuby][] is a high-performance Ruby implementation with real "
+"threading built on top of the Java virtual machine (JVM)."
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../README.md:81
+msgid ""
+"`mruby`: [mruby][] is a lightweight, embeddable Ruby implementation for "
+"microcontrollers."
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../README.md:83
+msgid ""
+"`picoruby`: [PicoRuby][] is an alternative mruby implementation for one-chip "
+"microcontrollers."
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../README.md:85
+msgid ""
+"`truffleruby`: The Native standalone distribution of [TruffleRuby][], an "
+"implementation of Ruby on top of GraalVM's Truffle framework."
+msgstr ""
+
+#. type: Bullet: '- '
+#: ../README.md:87
+msgid "`truffleruby+graalvm`: The JVM standalone distribution of TruffleRuby."
+msgstr ""
+
 #. type: Title ###
-#: ../README.md:64
+#: ../README.md:88
 #, no-wrap
 msgid "Advanced Usage"
 msgstr "発展的な使い方"
 
 #. type: Title ####
-#: ../README.md:66
+#: ../README.md:90
 #, no-wrap
 msgid "Custom Build Definitions"
 msgstr "独自のビルド定義"
 
 #. type: Plain text
-#: ../README.md:69
+#: ../README.md:93
 msgid ""
 "To install a version of Ruby that is not available in ruby-build, you can "
 "specify the path to a custom build definition file in place of a Ruby "
@@ -774,7 +949,7 @@ msgstr ""
 "バージョン番号の場所にある、独自のビルド定義ファイルへのパスを指定します。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:70
+#: ../README.md:94
 #, no-wrap
 msgid ""
 "# As a standalone program\n"
@@ -790,7 +965,7 @@ msgstr ""
 "$ rbenv install /path/to/3.4-custom              # $(rbenv root)/versions/3.4-custom にインストール\n"
 
 #. type: Plain text
-#: ../README.md:82
+#: ../README.md:106
 msgid ""
 "You can also provide a _directory_ of custom build definition files.  The "
 "path(s) will be searched along with ruby-build's bundled `share/ruby-build/` "
@@ -804,7 +979,7 @@ msgstr ""
 "れたり、組織の独自のビルド定義が組織内部で配布されたりするかもしれません）。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:83
+#: ../README.md:107
 #, no-wrap
 msgid ""
 "# As a standalone program\n"
@@ -824,7 +999,7 @@ msgstr ""
 "$ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install 3.5-custom              # $(rbenv root)/versions/3.5-custom にインストール\n"
 
 #. type: Plain text
-#: ../README.md:94
+#: ../README.md:118
 msgid ""
 "Check out [default build definitions][definitions] as examples on how to "
 "write definition files."
@@ -833,20 +1008,20 @@ msgstr ""
 "あります。"
 
 #. type: Title ####
-#: ../README.md:95
+#: ../README.md:119
 #, no-wrap
 msgid "Custom Build Configuration"
 msgstr "独自のビルド構成"
 
 #. type: Plain text
-#: ../README.md:98
+#: ../README.md:122
 msgid ""
 "The build process may be configured through the following environment "
 "variables:"
 msgstr "ビルド過程は、以下の環境変数を通じて構成できます。"
 
 #. type: Plain text
-#: ../README.md:126
+#: ../README.md:152
 #, no-wrap
 msgid ""
 "| Variable                        | Function                                                                                         |\n"
@@ -876,6 +1051,8 @@ msgid ""
 "| `RUBY_MAKE_INSTALL_OPTS`        | Additional `make install` options (applies only to Ruby source).                                 |\n"
 "| `NO_COLOR`                      | Disable ANSI colors in output. The default is to use colors for output connected to a terminal.  |\n"
 "| `CLICOLOR_FORCE`                | Use ANSI colors in output even when not connected to a terminal.                                 |\n"
+"| `RUBY_REPO`                     | The URL of the git repository to use when building `ruby-dev`                                    |\n"
+"| `RUBY_REF`                      | The git branch (or revision) to use when building `ruby-dev`, e.g. `some-branch@af12decf`        |\n"
 msgstr ""
 "| 変数                        | 機能                                                                                         |\n"
 "| ------------------------------- | ------------------------------------------------------------------------------------------------ |\n"
@@ -889,14 +1066,14 @@ msgstr ""
 "| `RUBY_BUILD_MIRROR_URL`         | 独自のミラーURLのルートです。                                                                          |\n"
 "| `RUBY_BUILD_MIRROR_PACKAGE_URL` | 独自の完全なミラーURLです（例：http://mirror.example.com/package-1.0.0.tar.gz）。                |\n"
 "| `RUBY_BUILD_SKIP_MIRROR`        | ダウンロードミラーを迂回し、全てのパッケージファイルを元のURLから取得します。                 |\n"
-"| `RUBY_BUILD_TARBALL_OVERRIDE`   | rubyのtarballを取得してくるためのURLを上塗りします。`#checksum`を付けられます。             |\n"
+"| `RUBY_BUILD_TARBALL_OVERRIDE`   | rubyのtarballを取得してくるためのURLを上塗りします。随意で`#checksum`を後に続けます。             |\n"
 "| `RUBY_BUILD_DEFINITIONS`        | コロン区切りのパスのリストであり、ビルド定義ファイルを探索する場所です。                              |\n"
-"| `RUBY_BUILD_ROOT`               | ビルド定義ファイルを探索するパスの接頭辞です。*廃止されました：*`RUBY_BUILD_DEFINITIONS`をお使いください|\n"
-"| `RUBY_BUILD_VENDOR_OPENSSL`     | システムのopensslに互換性があったとしても、opensslをビルドしてそれを使います                                |\n"
+"| `RUBY_BUILD_ROOT`               | ビルド定義ファイルを探索するパスの接頭辞です。*廃止済：*`RUBY_BUILD_DEFINITIONS`をお使いください|\n"
+"| `RUBY_BUILD_VENDOR_OPENSSL`     | システムのopensslに互換性があったとしても、opensslをビルドしてそれを取り入れます                                |\n"
 "| `CC`                            | Cコンパイラへのパスです。                                                                          |\n"
-"| `RUBY_CFLAGS`                   | `CFLAGS`への追加オプションです（*例*として`-O3`を上塗りできます）。                                         |\n"
+"| `RUBY_CFLAGS`                   | `CFLAGS`への追加オプションです（ *例* ：`-O3`を上塗り）。                                         |\n"
 "| `CONFIGURE_OPTS`                | `./configure`の追加オプションです。                                                                |\n"
-"| `MAKE`                          | 独自の`make`コマンドです（*例*として`gmake`）。                                                         |\n"
+"| `MAKE`                          | 独自の`make`コマンドです（ *例* ：`gmake`）。                                                         |\n"
 "| `MAKE_OPTS` / `MAKEOPTS`        | `make`の追加オプションです。                                                                       |\n"
 "| `MAKE_INSTALL_OPTS`             | `make install`の追加オプションです。                                                               |\n"
 "| `RUBY_CONFIGURE_OPTS`           | `./configure`の追加オプションです（Rubyのソースにのみ適用されます）。                                  |\n"
@@ -904,15 +1081,17 @@ msgstr ""
 "| `RUBY_MAKE_INSTALL_OPTS`        | `make install`の追加オプションです（Rubyのソースにのみ適用されます）。                                 |\n"
 "| `NO_COLOR`                      | 出力でANSIの彩色を無効にします。既定では端末に接続しているときの出力で色彩を使います。  |\n"
 "| `CLICOLOR_FORCE`                | 端末に接続していないときでも、出力でANSIの色彩を使います。                                 |\n"
+"| `RUBY_REPO`                     | `ruby-dev`を構築するときに使うgitリポジトリのURL |\n"
+"| `RUBY_REF`                      | `ruby-dev`を構築するときに使うgitブランチ（またはリビジョン）、例：`some-branch@af12decf` |\n"
 
 #. type: Title ####
-#: ../README.md:127
+#: ../README.md:153
 #, no-wrap
 msgid "Applying Patches"
 msgstr "パッチをあてる"
 
 #. type: Plain text
-#: ../README.md:130
+#: ../README.md:156
 msgid ""
 "Both `rbenv install` and `ruby-build` commands support the `-p/--patch` flag "
 "to apply a patch to the Ruby source code before building. Patches are read "
@@ -923,7 +1102,7 @@ msgstr ""
 "パッチは標準入力から読み取られます。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:131
+#: ../README.md:157
 #, no-wrap
 msgid ""
 "# applying a single patch\n"
@@ -945,13 +1124,13 @@ msgstr ""
 "$ cat fix1.patch fix2.patch | rbenv install --patch 1.9.3-p429\n"
 
 #. type: Title ####
-#: ../README.md:142
+#: ../README.md:168
 #, no-wrap
 msgid "Checksum Verification"
 msgstr "チェックサムの検証"
 
 #. type: Plain text
-#: ../README.md:145
+#: ../README.md:171
 msgid ""
 "All Ruby definition files bundled with ruby-build include checksums for "
 "packages, meaning that all externally downloaded packages are automatically "
@@ -963,28 +1142,29 @@ msgstr ""
 "性が検査されます。"
 
 #. type: Plain text
-#: ../README.md:147
+#: ../README.md:173
 msgid "See the next section for more information on how to author checksums."
 msgstr "チェックサムを施す方法についての詳細は、次節をご参照ください。"
 
 #. type: Title ####
-#: ../README.md:148
+#: ../README.md:174
 #, no-wrap
 msgid "Package Mirrors"
 msgstr "パッケージのミラー"
 
 #. type: Plain text
-#: ../README.md:153
+#: ../README.md:179
 msgid ""
 "You may specify a custom mirror by setting `RUBY_BUILD_MIRROR_URL`. When "
 "set, ruby-build will first attempt to download packages from the mirror "
 "before falling back to the original URL."
 msgstr ""
 "`RUBY_BUILD_MIRROR_URL`を設定して、独自のミラーを指定できます。\n"
-"設定したときは、まずミラーからパッケージのダウンロードを試み、それから元のURLにフォールバックします。"
+"設定したときは、まずミラーからパッケージのダウンロードを試み、それから元のURL"
+"にフォールバックします。"
 
 #. type: Fenced code block (sh)
-#: ../README.md:154
+#: ../README.md:180
 #, no-wrap
 msgid ""
 "# example:\n"
@@ -998,7 +1178,7 @@ msgstr ""
 "# こうすると、まず https://my-mirror.example.com/<SHA2> を試します\n"
 
 #. type: Plain text
-#: ../README.md:169
+#: ../README.md:195
 #, no-wrap
 msgid ""
 "ruby-build will first try to fetch this package from `$RUBY_BUILD_MIRROR_URL/<SHA2>`\n"
@@ -1020,7 +1200,7 @@ msgstr ""
 "- `RUBY_BUILD_SKIP_MIRROR`が有効のとき\n"
 
 #. type: Plain text
-#: ../README.md:173
+#: ../README.md:199
 msgid ""
 "If a mirror site doesn't conform to the above URL format, you can specify "
 "the complete URL by setting `RUBY_BUILD_MIRROR_PACKAGE_URL`. It behaves the "
@@ -1031,13 +1211,13 @@ msgstr ""
 "完全なURLである点を除き、`RUBY_BUILD_MIRROR_URL`と同じはたらきをします。"
 
 #. type: Title ####
-#: ../README.md:174
+#: ../README.md:200
 #, no-wrap
 msgid "Keeping the build directory after installation"
 msgstr "インストール後もビルドディレクトリを保持する"
 
 #. type: Plain text
-#: ../README.md:179
+#: ../README.md:205
 msgid ""
 "Both `ruby-build` and `rbenv install` accept the `-k` or `--keep` flag, "
 "which tells ruby-build to keep the downloaded source after installation. "
@@ -1050,7 +1230,7 @@ msgstr ""
 "ん。"
 
 #. type: Plain text
-#: ../README.md:184
+#: ../README.md:210
 msgid ""
 "Source code will be kept in a parallel directory tree `~/.rbenv/sources` "
 "when using `--keep` with the `rbenv install` command. You should specify the "
@@ -1063,20 +1243,20 @@ msgstr ""
 "所を指定するべきです。"
 
 #. type: Title ##
-#: ../README.md:185
+#: ../README.md:211
 #, no-wrap
 msgid "Getting Help"
 msgstr "困ったときは"
 
 #. type: Plain text
-#: ../README.md:188
+#: ../README.md:214
 msgid ""
 "Please see the [ruby-build wiki][wiki] for solutions to common problems."
 msgstr ""
 "よくある問題への解決策については[ruby-buildのウィキ][wiki]をご参照ください。"
 
 #. type: Plain text
-#: ../README.md:191
+#: ../README.md:217
 msgid ""
 "If you can't find an answer on the wiki, open an issue on the [issue tracker]"
 "[].  Be sure to include the full build log for build failures."
@@ -1086,34 +1266,70 @@ msgstr ""
 "必ず、ビルドで失敗したときのビルドログの全文を含めてください。"
 
 #. type: Link reference
-#: ../README.md:193
+#: ../README.md:219
 #, no-wrap
 msgid "[rbenv]: https://github.com/rbenv/rbenv#readme"
 msgstr "[rbenv]: https://github.com/gemmaro/rbenv/tree/ja/translation/ja#readme"
 
 #. type: Link reference
-#: ../README.md:194
+#: ../README.md:220
 #, no-wrap
 msgid "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 msgstr "[definitions]: https://github.com/rbenv/ruby-build/tree/master/share/ruby-build"
 
 #. type: Link reference
-#: ../README.md:195
+#: ../README.md:221
 #, no-wrap
 msgid "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 msgstr "[wiki]: https://github.com/rbenv/ruby-build/wiki"
 
 #. type: Link reference
-#: ../README.md:196
+#: ../README.md:222
 #, no-wrap
 msgid "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 msgstr "[build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment"
 
 #. type: Link reference
-#: ../README.md:197
+#: ../README.md:223
 #, no-wrap
 msgid "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
 msgstr "[issue tracker]: https://github.com/rbenv/ruby-build/issues"
+
+#. type: Link reference
+#: ../README.md:224
+#, no-wrap
+msgid "[cruby]: https://www.ruby-lang.org/"
+msgstr "[cruby]: https://www.ruby-lang.org/"
+
+#. type: Link reference
+#: ../README.md:225
+#, no-wrap
+msgid "[truffleruby]: https://truffleruby.dev/"
+msgstr "[truffleruby]: https://truffleruby.dev/"
+
+#. type: Link reference
+#: ../README.md:226
+#, no-wrap
+msgid "[picoruby]: https://github.com/picoruby/picoruby#readme"
+msgstr "[picoruby]: https://github.com/picoruby/picoruby#readme"
+
+#. type: Link reference
+#: ../README.md:227
+#, no-wrap
+msgid "[mruby]: https://mruby.org/"
+msgstr "[mruby]: https://mruby.org/"
+
+#. type: Link reference
+#: ../README.md:228
+#, no-wrap
+msgid "[jruby]: https://www.jruby.org/"
+msgstr "[jruby]: https://www.jruby.org/"
+
+#. type: Link reference
+#: ../README.md:229
+#, no-wrap
+msgid "[ruby-install]: https://github.com/postmodern/ruby-install#readme"
+msgstr "[ruby-install]: https://github.com/postmodern/ruby-install#readme"
 
 #~ msgid ""
 #~ "To speed up downloads, ruby-build fetches package files from a mirror "

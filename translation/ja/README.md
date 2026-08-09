@@ -42,14 +42,16 @@ PREFIX=/usr/local ./ruby-build-*/install.sh
 ### 基本的な使い方
 
 ```sh
-# 独立としたプログラムとしての使い方
-$ ruby-build --list                        # 最新安定リリースのRubyのバージョンの一覧
-$ ruby-build --definitions                 # 定義を一覧にします（旧版含む）
-$ ruby-build 3.2.2 /opt/rubies/ruby-3.2.2  # Ruby 3.2.2をインストールします
-$ ruby-build -d ruby-3.2.2 /opt/rubies     # 上の例の別の形式
+# 独立としたプログラムとして
+$ ruby-build --list                        # 各Rubyの最新安定リリースを一覧化
+$ ruby-build --definitions                 # 全定義を一覧化、旧版を含みます
+$ ruby-build 3.4.9 ~/.rubies/ruby-3.4.9    # Ruby 3.4.9をインストール
+$ ruby-build -d ruby-3.4.9 ~/.rubies       # 上の例の別の形式
+$ ruby-build -d ruby-3.4 ~/.rubies         # 最新のRuby 3.4.xをインストール
 
-# rbenvのプラグインとしての使い方
-$ rbenv install 3.2.2  # Ruby 3.2.2を ~/.rbenv/versions/3.2.2 へインストールします
+# rbenvのプラグインとして
+$ rbenv install 3.4.9  # Ruby 3.4.9を ~/.rbenv/versions/3.4.9 へインストール
+$ rbenv install 3      # 最新のRuby 3.xをインストール
 ```
 
 > [!WARNING]
@@ -67,6 +69,46 @@ $ rbenv install 3.2.2  # Ruby 3.2.2を ~/.rbenv/versions/3.2.2 へインスト�
 例えば、Rubyに適切なOpenSSLのバージョンをリンクしようとします。
 OpenSSL自体をダウンロードしてコンパイルすることも指しています。
 Homebrewでインストールされたlibyamlやreadlineといったライブラリを見つけてリンクしようともします。
+
+### Rubyの版
+
+When listing "latest" Ruby versions, such as in `ruby-build --list` output,
+ruby-build only knows of Ruby versions that are bundled with this
+project. That means that when a new Ruby version comes out, ruby-build will
+not know about it immediately— you will have to upgrade ruby-build before
+you can use it to install the new Ruby version. This is because ruby-build
+bundles [definition files](#custom-build-definitions) for each individual
+Ruby version.
+
+If it's important to you that your installer tool always consults remote
+resources to download the list of latest Ruby versions (without having to
+upgrade the tool itself), check out [ruby-install][] as an alternative to
+ruby-build.
+
+### Rubyの実装
+
+ruby-build ships with definitions for the following Ruby implementations,
+denoted by version prefixes in the `ruby-build --list` output:
+
+- [CRuby][]: listed in ruby-build as unprefixed version numbers in the
+  `X.Y.Z` format. This is the main Ruby implementation that most people use
+  and is also historically known as "MRI". ruby-build allows adding the
+  `ruby-` prefix to CRuby version numbers for compatibility with other
+  version managers.
+
+- `jruby`: [JRuby][] is a high-performance Ruby implementation with real
+  threading built on top of the Java virtual machine (JVM).
+
+- `mruby`: [mruby][] is a lightweight, embeddable Ruby implementation for
+  microcontrollers.
+
+- `picoruby`: [PicoRuby][] is an alternative mruby implementation for
+  one-chip microcontrollers.
+
+- `truffleruby`: The Native standalone distribution of [TruffleRuby][], an
+  implementation of Ruby on top of GraalVM's Truffle framework.
+
+- `truffleruby+graalvm`: The JVM standalone distribution of TruffleRuby.
 
 ### 発展的な使い方
 
@@ -114,14 +156,14 @@ $ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install 3.5-custom          
 | `RUBY_BUILD_MIRROR_URL`         | 独自のミラーURLのルートです。                                                                          |
 | `RUBY_BUILD_MIRROR_PACKAGE_URL` | 独自の完全なミラーURLです（例：http://mirror.example.com/package-1.0.0.tar.gz）。                |
 | `RUBY_BUILD_SKIP_MIRROR`        | ダウンロードミラーを迂回し、全てのパッケージファイルを元のURLから取得します。                 |
-| `RUBY_BUILD_TARBALL_OVERRIDE`   | rubyのtarballを取得してくるためのURLを上塗りします。`#checksum`を付けられます。             |
+| `RUBY_BUILD_TARBALL_OVERRIDE`   | rubyのtarballを取得してくるためのURLを上塗りします。随意で`#checksum`を後に続けます。             |
 | `RUBY_BUILD_DEFINITIONS`        | コロン区切りのパスのリストであり、ビルド定義ファイルを探索する場所です。                              |
-| `RUBY_BUILD_ROOT`               | ビルド定義ファイルを探索するパスの接頭辞です。*廃止されました：*`RUBY_BUILD_DEFINITIONS`をお使いください|
-| `RUBY_BUILD_VENDOR_OPENSSL`     | システムのopensslに互換性があったとしても、opensslをビルドしてそれを使います                                |
+| `RUBY_BUILD_ROOT`               | ビルド定義ファイルを探索するパスの接頭辞です。*廃止済：*`RUBY_BUILD_DEFINITIONS`をお使いください|
+| `RUBY_BUILD_VENDOR_OPENSSL`     | システムのopensslに互換性があったとしても、opensslをビルドしてそれを取り入れます                                |
 | `CC`                            | Cコンパイラへのパスです。                                                                          |
-| `RUBY_CFLAGS`                   | `CFLAGS`への追加オプションです（*例*として`-O3`を上塗りできます）。                                         |
+| `RUBY_CFLAGS`                   | `CFLAGS`への追加オプションです（ *例* ：`-O3`を上塗り）。                                         |
 | `CONFIGURE_OPTS`                | `./configure`の追加オプションです。                                                                |
-| `MAKE`                          | 独自の`make`コマンドです（*例*として`gmake`）。                                                         |
+| `MAKE`                          | 独自の`make`コマンドです（ *例* ：`gmake`）。                                                         |
 | `MAKE_OPTS` / `MAKEOPTS`        | `make`の追加オプションです。                                                                       |
 | `MAKE_INSTALL_OPTS`             | `make install`の追加オプションです。                                                               |
 | `RUBY_CONFIGURE_OPTS`           | `./configure`の追加オプションです（Rubyのソースにのみ適用されます）。                                  |
@@ -129,6 +171,8 @@ $ RUBY_BUILD_DEFINITIONS=/path/to/custom/defs rbenv install 3.5-custom          
 | `RUBY_MAKE_INSTALL_OPTS`        | `make install`の追加オプションです（Rubyのソースにのみ適用されます）。                                 |
 | `NO_COLOR`                      | 出力でANSIの彩色を無効にします。既定では端末に接続しているときの出力で色彩を使います。  |
 | `CLICOLOR_FORCE`                | 端末に接続していないときでも、出力でANSIの色彩を使います。                                 |
+| `RUBY_REPO`                     | `ruby-dev`を構築するときに使うgitリポジトリのURL |
+| `RUBY_REF`                      | `ruby-dev`を構築するときに使うgitブランチ（またはリビジョン）、例：`some-branch@af12decf` |
 
 #### パッチをあてる
 
@@ -200,6 +244,12 @@ Rubyで`gdb`や`memprof`を使う必要があるときは役に立つことが�
   [wiki]: https://github.com/rbenv/ruby-build/wiki
   [build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
   [issue tracker]: https://github.com/rbenv/ruby-build/issues
+  [cruby]: https://www.ruby-lang.org/
+  [truffleruby]: https://truffleruby.dev/
+  [picoruby]: https://github.com/picoruby/picoruby#readme
+  [mruby]: https://mruby.org/
+  [jruby]: https://www.jruby.org/
+  [ruby-install]: https://github.com/postmodern/ruby-install#readme
 
 ## 日本語訳について
 
