@@ -15,7 +15,7 @@ file="share/ruby-build/truffleruby-${version}"
 add_platform() {
   platform="$1"
   basename="truffleruby-${version}-${platform}.tar.gz"
-  url="https://github.com/oracle/truffleruby/releases/download/graal-${version}/${basename}"
+  url="https://github.com/truffleruby/truffleruby/releases/download/graal-${version}/${basename}"
   sha256=$(sha256sum "$release_directory/$basename" | cut -d ' ' -f 1)
 
   cat >> "$file" <<EOS
@@ -34,10 +34,6 @@ cat >> "$file" <<EOS
 Linux-aarch64)
 EOS
 add_platform "linux-aarch64"
-cat >> "$file" <<EOS
-Darwin-x86_64)
-EOS
-add_platform "macos-amd64"
 cat >> "$file" <<EOS
 Darwin-arm64)
 EOS

@@ -42,11 +42,13 @@ PREFIX=/usr/local ./ruby-build-*/install.sh
 # As a standalone program
 $ ruby-build --list                        # lists latest stable releases for each Ruby
 $ ruby-build --definitions                 # lists all definitions, including outdated ones
-$ ruby-build 3.2.2 ~/.rubies/ruby-3.2.2    # installs Ruby 3.2.2
-$ ruby-build -d ruby-3.2.2 ~/.rubies       # alternate form for the previous example
+$ ruby-build 3.4.9 ~/.rubies/ruby-3.4.9    # installs Ruby 3.4.9
+$ ruby-build -d ruby-3.4.9 ~/.rubies       # alternate form for the previous example
+$ ruby-build -d ruby-3.4 ~/.rubies         # installs latest Ruby 3.4.x
 
 # As an rbenv plugin
-$ rbenv install 3.2.2  # installs Ruby 3.2.2 to ~/.rbenv/versions/3.2.2
+$ rbenv install 3.4.9  # installs Ruby 3.4.9 to ~/.rbenv/versions/3.4.9
+$ rbenv install 3      # installs latest Ruby 3.x
 ```
 
 > [!WARNING]
@@ -60,6 +62,28 @@ Basically, what ruby-build does when installing a Ruby version is this:
 - Verifies that the installed Ruby is functional.
 
 Depending on the context, ruby-build does a little bit more than the above: for example, it will try to link Ruby to the appropriate OpenSSL version, even if that means downloading and compiling OpenSSL itself; it will discover and link to Homebrew-installed instances of some libraries like libyaml and readline, etc.
+
+### Ruby versions
+
+When listing "latest" Ruby versions, such as in `ruby-build --list` output, ruby-build only knows of Ruby versions that are bundled with this project. That means that when a new Ruby version comes out, ruby-build will not know about it immediately— you will have to upgrade ruby-build before you can use it to install the new Ruby version. This is because ruby-build bundles [definition files](#custom-build-definitions) for each individual Ruby version.
+
+If it's important to you that your installer tool always consults remote resources to download the list of latest Ruby versions (without having to upgrade the tool itself), check out [ruby-install][] as an alternative to ruby-build.
+
+### Ruby implementations
+
+ruby-build ships with definitions for the following Ruby implementations, denoted by version prefixes in the `ruby-build --list` output:
+
+- [CRuby][]: listed in ruby-build as unprefixed version numbers in the `X.Y.Z` format. This is the main Ruby implementation that most people use and is also historically known as "MRI". ruby-build allows adding the `ruby-` prefix to CRuby version numbers for compatibility with other version managers.
+
+- `jruby`: [JRuby][] is a high-performance Ruby implementation with real threading built on top of the Java virtual machine (JVM).
+
+- `mruby`: [mruby][] is a lightweight, embeddable Ruby implementation for microcontrollers.
+
+- `picoruby`: [PicoRuby][] is an alternative mruby implementation for one-chip microcontrollers.
+
+- `truffleruby`: The Native standalone distribution of [TruffleRuby][], an implementation of Ruby on top of GraalVM's Truffle framework.
+
+- `truffleruby+graalvm`: The JVM standalone distribution of TruffleRuby.
 
 ### Advanced Usage
 
@@ -123,6 +147,8 @@ The build process may be configured through the following environment variables:
 | `RUBY_MAKE_INSTALL_OPTS`        | Additional `make install` options (applies only to Ruby source).                                 |
 | `NO_COLOR`                      | Disable ANSI colors in output. The default is to use colors for output connected to a terminal.  |
 | `CLICOLOR_FORCE`                | Use ANSI colors in output even when not connected to a terminal.                                 |
+| `RUBY_REPO`                     | The URL of the git repository to use when building `ruby-dev`                                    |
+| `RUBY_REF`                      | The git branch (or revision) to use when building `ruby-dev`, e.g. `some-branch@af12decf`        |
 
 #### Applying Patches
 
@@ -195,3 +221,9 @@ Be sure to include the full build log for build failures.
   [wiki]: https://github.com/rbenv/ruby-build/wiki
   [build-env]: https://github.com/rbenv/ruby-build/wiki#suggested-build-environment
   [issue tracker]: https://github.com/rbenv/ruby-build/issues
+  [cruby]: https://www.ruby-lang.org/
+  [truffleruby]: https://truffleruby.dev/
+  [picoruby]: https://github.com/picoruby/picoruby#readme
+  [mruby]: https://mruby.org/
+  [jruby]: https://www.jruby.org/
+  [ruby-install]: https://github.com/postmodern/ruby-install#readme

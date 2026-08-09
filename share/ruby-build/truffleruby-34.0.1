@@ -1,0 +1,16 @@
+platform="$(uname -s)-$(uname -m)"
+case $platform in
+Linux-x86_64)
+  install_package "truffleruby-34.0.1" "https://github.com/truffleruby/truffleruby/releases/download/graal-34.0.1/truffleruby-34.0.1-linux-amd64.tar.gz#15fb3c5bb6d2917a2e5d08497f62586d262cddd65c9d251f098f6b568b33a8f7" truffleruby
+  ;;
+Linux-aarch64)
+  install_package "truffleruby-34.0.1" "https://github.com/truffleruby/truffleruby/releases/download/graal-34.0.1/truffleruby-34.0.1-linux-aarch64.tar.gz#10ed8310addb41782d92ce44e1ec9b2865b65f1c8d7c4ce489d6e84854d0bca5" truffleruby
+  ;;
+Darwin-arm64)
+  install_package "truffleruby-34.0.1" "https://github.com/truffleruby/truffleruby/releases/download/graal-34.0.1/truffleruby-34.0.1-macos-aarch64.tar.gz#7a1404751b88aa49686e0787eafc9695d67ac3925d9d2bfdb881a4e5258842f3" truffleruby
+  ;;
+*)
+  colorize 1 "Unsupported platform: $platform"
+  return 1
+  ;;
+esac

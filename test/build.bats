@@ -423,6 +423,12 @@ install_package "ruby-3.2.0" "http://ruby-lang.org/ruby/2.0/ruby-3.2.0.tar.gz"
 DEF
   assert_success
 
+  sanitized_output="$(grep -v '^\(->\|==>\)' <<<"$output" || true)"
+  if [ -n "$sanitized_output" ]; then
+    echo "expected no warnings, got: $sanitized_output"
+    return 1
+  fi
+
   unstub uname
   unstub brew
   unstub cc
@@ -776,6 +782,30 @@ DEF
 
   assert_build_log <<OUT
 ruby-3.2.0: [--prefix=$INSTALL_ROOT/ruby-3.2.0,--with-ext=openssl,psych,+]
+make -j 2
+make install
+OUT
+}
+
+@test "nested install destination with ruby prefix and version prefix" {
+  cached_tarball "ruby-3.2.45" configure
+
+  stub_repeated brew false
+  stub_make_install
+
+  mkdir -p "$TMP"/definitions
+  cat > "$TMP"/definitions/3.2.45 <<DEF
+install_package "ruby-3.2.45" "http://ruby-lang.org/ruby/2.0/ruby-3.2.45.tar.gz"
+DEF
+
+  RUBY_BUILD_DEFINITIONS="$TMP"/definitions run ruby-build --dir ruby-3.2 "$INSTALL_ROOT"
+  assert_success
+
+  unstub brew
+  unstub make
+
+  assert_build_log <<OUT
+ruby-3.2.45: [--prefix=$INSTALL_ROOT/ruby-3.2.45,--with-ext=openssl,psych,+]
 make -j 2
 make install
 OUT
