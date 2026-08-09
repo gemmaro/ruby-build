@@ -1,3 +1,4 @@
 #!/bin/sh
 set -eu
 git remote add mainstream https://github.com/rbenv/ruby-build
+git remote add fork git@github.com:gemmaro/ruby-build.git
