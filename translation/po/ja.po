@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ruby-build\n"
 "POT-Creation-Date: 2026-08-09 14:58+0900\n"
-"PO-Revision-Date: 2026-08-13 17:23+0900\n"
+"PO-Revision-Date: 2026-08-13 17:26+0900\n"
 "Last-Translator: gemmaro <gemmaro.dev@gmail.com>\n"
 "Language-Team: none\n"
 "Language: ja\n"
@@ -911,7 +911,7 @@ msgstr "`jruby`：[JRuby][]は高性能なRubyの実装でJava仮想機械 (Java
 msgid ""
 "`mruby`: [mruby][] is a lightweight, embeddable Ruby implementation for "
 "microcontrollers."
-msgstr "`mruby`：は軽量で、組み込み可能なマイクロコントローラ用のRubyの実装です。"
+msgstr "`mruby`：[mruby][]は軽量で、組み込み可能なマイクロコントローラ用のRubyの実装です。"
 
 #. type: Bullet: '- '
 #: ../README.md:83
