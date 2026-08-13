@@ -72,43 +72,32 @@ Homebrewでインストールされたlibyamlやreadlineといったライブラ
 
 ### Rubyの版
 
-When listing "latest" Ruby versions, such as in `ruby-build --list` output,
-ruby-build only knows of Ruby versions that are bundled with this
-project. That means that when a new Ruby version comes out, ruby-build will
-not know about it immediately— you will have to upgrade ruby-build before
-you can use it to install the new Ruby version. This is because ruby-build
-bundles [definition files](#custom-build-definitions) for each individual
-Ruby version.
+「最新の」Rubyの版を一覧するとき、つまり`ruby-build
+--list`の出力においては、ruby-buildはこのプロジェクトに付属するRubyの版しか知りません。
+それが意味するのは新しいRubyの版が出たとき、ruby-buildは直ちにはそれを知らないということです――その新しいRubyの版をインストールして使えるようにする前にruby-buildを更新せねばなりません。
+これはruby-buildが各個別のRubyの版について[定義ファイル](#custom-build-definitions)を付属しているからです。
 
-If it's important to you that your installer tool always consults remote
-resources to download the list of latest Ruby versions (without having to
-upgrade the tool itself), check out [ruby-install][] as an alternative to
-ruby-build.
+最新のRubyの版の一覧をダウンロードすべく（ツール自体を更新する必要なく）インストーラが常に遠隔の資源をあたることが重要であれば、[ruby-install][]をruby-buildの代替としてご確認ください。
 
 ### Rubyの実装
 
-ruby-build ships with definitions for the following Ruby implementations,
-denoted by version prefixes in the `ruby-build --list` output:
+ruby-buildは以下のRubyの実装のための定義を備えており、それらの実装は`ruby-build
+--list`の出力では版の接頭辞に記されています。
 
-- [CRuby][]: listed in ruby-build as unprefixed version numbers in the
-  `X.Y.Z` format. This is the main Ruby implementation that most people use
-  and is also historically known as "MRI". ruby-build allows adding the
-  `ruby-` prefix to CRuby version numbers for compatibility with other
-  version managers.
+- [CRuby][]：ruby-buildでは`X.Y.Z`の形式で接頭辞のない版の番号として一覧されます。
+  これはほとんどの人々が使う主要なRubyの実装であり歴史的に「MRI」として知られるものでもあります。
+  ruby-buildでは他の版の管理器との互換性のためCRubyの版の番号に`ruby-`の接頭辞を加えることを許容します。
 
-- `jruby`: [JRuby][] is a high-performance Ruby implementation with real
-  threading built on top of the Java virtual machine (JVM).
+- `jruby`：[JRuby][]は高性能なRubyの実装でJava仮想機械 (Java Virtual Machine; JVM)
+  を土台に構築された本物のスレッドが付いています。
 
-- `mruby`: [mruby][] is a lightweight, embeddable Ruby implementation for
-  microcontrollers.
+- `mruby`：は軽量で、組み込み可能なマイクロコントローラ用のRubyの実装です。
 
-- `picoruby`: [PicoRuby][] is an alternative mruby implementation for
-  one-chip microcontrollers.
+- `picoruby`：[PicoRuby][]はワンチップのマイクロコントーラ用の代替のmrubyの実装です。
 
-- `truffleruby`: The Native standalone distribution of [TruffleRuby][], an
-  implementation of Ruby on top of GraalVM's Truffle framework.
+- `truffleruby`：[TruffleRuby][]のネイティブの独立した配布物で、GraalVMのTruffleフレームワークを土台にするRubyの実装です。
 
-- `truffleruby+graalvm`: The JVM standalone distribution of TruffleRuby.
+- `truffleruby+graalvm`：JVMの独立したTruffleRubyの配布物です。
 
 ### 発展的な使い方
 
